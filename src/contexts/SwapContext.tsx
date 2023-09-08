@@ -22,7 +22,7 @@ import { useTokenContext } from './TokenContextProvider';
 import { useWalletPassThrough } from './WalletPassthroughProvider';
 import { useAccounts } from './accounts';
 import Decimal from 'decimal.js';
-import { setupDCA } from 'src/dca';
+import { findByUser, setupDCA } from 'src/dca';
 import { BN } from 'bn.js';
 import { TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
 import { ASSOCIATED_PROGRAM_ID } from '@project-serum/anchor/dist/cjs/utils/token';
@@ -36,7 +36,10 @@ export interface IForm {
   selectedPlan: ILockingPlan['name'];
 }
 
-type EscrowParsedState = 'active' | 'finished';
+// active: DCA is still ongoing
+// finished: DCA is finished, but unclaimed
+// closed: DCA is finished and claimed
+export type EscrowParsedState = 'active' | 'finished' | 'closed';
 export type ParsedEscrow = {
   publicKey: PublicKey;
   account: IdlAccounts<DcaIntegration>['escrow'];
@@ -81,7 +84,11 @@ export interface ISwapContext {
     program: Program<DcaIntegration> | null;
     dcaClient: DCA | null;
     provider: AnchorProvider | null;
-    escrows?: ParsedEscrow[];
+    escrows?: {
+      active: ParsedEscrow[];
+      finished: ParsedEscrow[];
+      closed: ParsedEscrow[];
+    };
   };
   refresh: () => void;
   reset: (props?: { resetValues: boolean }) => void;
@@ -121,7 +128,11 @@ export const initialSwapContext: ISwapContext = {
     program: null,
     dcaClient: null,
     provider: null,
-    escrows: [],
+    escrows: {
+      active: [],
+      finished: [],
+      closed: [],
+    },
   },
   refresh() {},
   reset() {},
@@ -165,6 +176,7 @@ export function useSwapContext(): ISwapContext {
   return useContext(SwapContext);
 }
 
+const LOCKED_DCA_PROGRAM_ID = new PublicKey('5mrhiqFFXyfJMzAJc5vsEQ4cABRhfsP7MgSVgGQjfcrR');
 export const PRIORITY_NONE = 0; // No additional fee
 export const PRIORITY_HIGH = 0.000_005; // Additional fee of 1x base fee
 export const PRIORITY_TURBO = 0.000_5; // Additional fee of 100x base fee
@@ -232,17 +244,9 @@ export const SwapContextProvider: FC<{
   const { data: escrows, refetch: refetchEscrows } = useQuery(
     ['existing-locked-dca', walletPublicKey],
     async () => {
-      if (!walletPublicKey) return [];
+      if (!walletPublicKey) return undefined;
 
-      const escrows = await program.account.escrow.all([
-        {
-          memcmp: {
-            offset: 8 + 8,
-            bytes: walletPublicKey.toBase58(),
-          },
-        },
-      ]);
-
+      const escrows = await findByUser(program, walletPublicKey);
       const parsedEscrows = await Promise.all(
         escrows.map(async (item) => {
           return {
@@ -259,7 +263,10 @@ export const SwapContextProvider: FC<{
                 }
 
                 if (finished.status === 'fulfilled' && finished.value.length > 0) {
-                  return { state: 'finished' as EscrowParsedState, account: finished.value[0].account };
+                  return {
+                    state: item.account.completed ? 'closed' : ('finished' as EscrowParsedState),
+                    account: finished.value[0].account,
+                  };
                 }
               } catch (error) {}
               return null;
@@ -267,7 +274,22 @@ export const SwapContextProvider: FC<{
           };
         }),
       );
-      return parsedEscrows;
+
+      if (!parsedEscrows) {
+        return undefined;
+      }
+
+      return parsedEscrows.reduce(
+        (acc, item) => {
+          if (!acc) return undefined;
+
+          if (item.parsed?.state === 'active') acc.active.push(item);
+          if (item.parsed?.state === 'finished') acc.finished.push(item);
+          if (item.parsed?.state === 'closed') acc.closed.push(item);
+          return acc;
+        },
+        { active: [], finished: [], closed: [] } as ISwapContext['dca']['escrows'],
+      );
     },
     {
       refetchInterval: 10_000,
@@ -294,9 +316,8 @@ export const SwapContextProvider: FC<{
 
   const { signTransaction } = useWallet();
   const { connection } = useConnection();
-  const programId = new PublicKey('5mrhiqFFXyfJMzAJc5vsEQ4cABRhfsP7MgSVgGQjfcrR');
   const provider = new AnchorProvider(connection, {} as any, AnchorProvider.defaultOptions());
-  const program = new Program(IDL, programId, provider);
+  const program = new Program(IDL, LOCKED_DCA_PROGRAM_ID, provider);
   const dcaClient = new DCA(connection, Network.MAINNET);
 
   const onSubmit = useCallback(async () => {

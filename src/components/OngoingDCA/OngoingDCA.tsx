@@ -52,7 +52,11 @@ const DCAItem: React.FC<{ item: ParsedEscrow }> = ({ item }) => {
             <TokenIcon tokenInfo={inputTokenInfo} />
             <TokenIcon tokenInfo={outputTokenInfo} />
           </div>
-          <span className="font-semibold">{item.parsed?.state === 'active' ? 'Ongoing' : 'Finished'}</span>
+          <span className="font-semibold">
+            {item.parsed?.state === 'active' ? 'Ongoing' : ''}
+            {item.parsed?.state === 'finished' ? 'Finished' : ''}
+            {item.parsed?.state === 'closed' ? 'Closed' : ''}
+          </span>
         </div>
 
         <span>
@@ -91,11 +95,15 @@ const DCAList: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
     dca: { escrows },
   } = useSwapContext();
 
+  if (!escrows) return null;
+
+  const { active, finished, closed } = escrows;
+
   return (
     <div className={classNames('w-full rounded-xl flex flex-col bg-jupiter-bg text-white shadow-xl max-h-[90%]')}>
       <div className="flex justify-between items-center p-4 border-b border-white/10">
         <div className="text-sm font-semibold">
-          <span>Ongoing DCA</span>
+          <span>All orders</span>
         </div>
         <div className="text-white fill-current cursor-pointer" onClick={() => closeModal()}>
           <CloseIcon width={14} height={14} />
@@ -103,11 +111,24 @@ const DCAList: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
       </div>
 
       <div className={classNames('relative w-full overflow-y-auto webkit-scrollbar p-2')}>
-        <div>
-          {escrows?.map((item) => (
-            <DCAItem key={item.publicKey.toString()} item={item} />
-          ))}
-        </div>
+        <div className="border-b border-white/10 text-xs font-semibold text-white/50">Active</div>
+        {active.length > 0 ? (
+          active.map((item) => <DCAItem key={item.publicKey.toString()} item={item} />)
+        ) : (
+          <div className="text-xs text-white/50 pt-2">No active DCA</div>
+        )}
+        <div className="mt-8 border-b border-white/10 text-xs font-semibold text-white/50">Finished</div>
+        {finished.length > 0 ? (
+          finished.map((item) => <DCAItem key={item.publicKey.toString()} item={item} />)
+        ) : (
+          <div className="text-xs text-white/50 pt-2">No finished DCA</div>
+        )}
+        <div className="mt-8 border-b border-white/10 text-xs font-semibold text-white/50">Closed</div>
+        {closed.length > 0 ? (
+          closed.map((item) => <DCAItem key={item.publicKey.toString()} item={item} />)
+        ) : (
+          <div className="text-xs text-white/50 pt-2">No closed DCA</div>
+        )}
       </div>
     </div>
   );
@@ -121,13 +142,22 @@ const OngoingDCA = () => {
 
   const [showOngoingDCA, setShowOngoingDCA] = useState(false);
 
-  if (!wallet?.adapter.publicKey || (escrows?.length || 0) === 0) return null;
+  if (!wallet?.adapter.publicKey || !escrows) return null;
+
+  const { active, finished, closed } = escrows;
+  const total = active.length + finished.length + closed.length;
+  if (total === 0) return null;
 
   return (
     <>
       <div className="px-4 py-2" onClick={() => setShowOngoingDCA(true)}>
         <div className="border border-black/10 shadow-xl bg-white/5 font-semibold text-white text-xs rounded-lg py-2 px-3 flex justify-between hover:bg-white/10 cursor-pointer">
-          <span>You have {escrows?.length} ongoing DCA plans.</span>
+          {active.length > 0 ? (
+            <span>You have {active.length} ongoing DCA plans.</span>
+          )
+          : (
+            <span>Check all DCA orders</span>
+          )}
           <div className="rotate-180 text-white/20 fill-current flex items-center">
             <ChevronLeftIcon width={10} height={10} />
           </div>

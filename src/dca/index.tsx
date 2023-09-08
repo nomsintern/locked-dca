@@ -196,7 +196,7 @@ export async function close({
   return tx;
 }
 
-async function findByUser(program: Program<DcaIntegration>, user: PublicKey) {
+export async function findByUser(program: Program<DcaIntegration>, user: PublicKey) {
   return program.account.escrow.all([
     {
       memcmp: {

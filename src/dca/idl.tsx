@@ -195,6 +195,10 @@ export type DcaIntegration = {
             type: 'publicKey';
           },
           {
+            name: 'dca';
+            type: 'publicKey';
+          },
+          {
             name: 'inputMint';
             type: 'publicKey';
           },
@@ -203,8 +207,16 @@ export type DcaIntegration = {
             type: 'publicKey';
           },
           {
-            name: 'dca';
-            type: 'publicKey';
+            name: 'inputAmount';
+            type: 'u64';
+          },
+          {
+            name: 'outputAmount';
+            type: 'u64';
+          },
+          {
+            name: 'completed';
+            type: 'bool';
           },
           {
             name: 'bump';
@@ -425,6 +437,10 @@ export const IDL: DcaIntegration = {
             type: 'publicKey',
           },
           {
+            name: 'dca',
+            type: 'publicKey',
+          },
+          {
             name: 'inputMint',
             type: 'publicKey',
           },
@@ -433,8 +449,16 @@ export const IDL: DcaIntegration = {
             type: 'publicKey',
           },
           {
-            name: 'dca',
-            type: 'publicKey',
+            name: 'inputAmount',
+            type: 'u64',
+          },
+          {
+            name: 'outputAmount',
+            type: 'u64',
+          },
+          {
+            name: 'completed',
+            type: 'bool',
           },
           {
             name: 'bump',
