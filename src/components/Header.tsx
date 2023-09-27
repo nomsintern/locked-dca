@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { useSwapContext } from 'src/contexts/SwapContext';
+import { useSwapContext } from '../contexts/SwapContext';
 
 import JupiterLogo from '../icons/JupiterLogo';
 import { WalletButton } from './WalletComponents';
-import RefreshSVG from 'src/icons/RefreshSVG';
+import RefreshSVG from '../icons/RefreshSVG';
 
 const Header: React.FC<{ setIsWalletModalOpen(toggle: boolean): void }> = ({ setIsWalletModalOpen }) => {
   const { form, refresh } = useSwapContext();

@@ -3,13 +3,13 @@ import { useConnection } from '@solana/wallet-adapter-react';
 import React, { useMemo, useState, useEffect } from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
-import { useScreenState } from 'src/contexts/ScreenProvider';
-import { SwapContextProvider } from 'src/contexts/SwapContext';
-import { ROUTE_CACHE_DURATION } from 'src/misc/constants';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
-import { IInit } from 'src/types';
-import { SlippageConfigProvider } from 'src/contexts/SlippageConfigProvider';
-import { USDValueProvider } from 'src/contexts/USDValueProvider';
+import { useScreenState } from '../contexts/ScreenProvider';
+import { SwapContextProvider } from '../contexts/SwapContext';
+import { ROUTE_CACHE_DURATION } from '../misc/constants';
+import { useWalletPassThrough } from '../contexts/WalletPassthroughProvider';
+import { IInit } from '../types';
+import { SlippageConfigProvider } from '../contexts/SlippageConfigProvider';
+import { USDValueProvider } from '../contexts/USDValueProvider';
 
 import Header from '../components/Header';
 import { AccountsProvider } from '../contexts/accounts';

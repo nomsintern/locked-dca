@@ -11,18 +11,18 @@ import FormError from './FormError';
 import TokenIcon from './TokenIcon';
 
 import { WRAPPED_SOL_MINT } from '../constants';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
-import WalletIcon from 'src/icons/WalletIcon';
+import { useWalletPassThrough } from '../contexts/WalletPassthroughProvider';
+import WalletIcon from '../icons/WalletIcon';
 import classNames from 'classnames';
-import { detectedSeparator, formatNumber } from 'src/misc/utils';
+import { detectedSeparator, formatNumber } from '../misc/utils';
 import CoinBalanceUSD from './CoinBalanceUSD';
-import ChevronDownIcon from 'src/icons/ChevronDownIcon';
+import ChevronDownIcon from '../icons/ChevronDownIcon';
 import JupButton from './JupButton';
 import SexyChameleonText from './SexyChameleonText/SexyChameleonText';
-import useJupiterSwapPriceFetcher from 'src/hooks/useJupiterSwapPriceFetcher';
+import useJupiterSwapPriceFetcher from '../hooks/useJupiterSwapPriceFetcher';
 import Decimal from 'decimal.js';
-import { ILockingPlan, LOCKING_PLAN, useSwapContext } from 'src/contexts/SwapContext';
-import { setupDCA } from 'src/dca';
+import { ILockingPlan, LOCKING_PLAN, useSwapContext } from '../contexts/SwapContext';
+import { setupDCA } from '../dca';
 
 
 

@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import CloseIcon from 'src/icons/CloseIcon';
-import JupiterLogo from 'src/icons/JupiterLogo';
-import MenuIcon from 'src/icons/MenuIcon';
+import CloseIcon from '../../icons/CloseIcon';
+import JupiterLogo from '../../icons/JupiterLogo';
+import MenuIcon from '../../icons/MenuIcon';
 import HeaderLinks from './HeaderLinks';
 import HeaderLinksMobile from './HeaderLinksMobile';
 

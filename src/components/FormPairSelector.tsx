@@ -3,14 +3,14 @@ import classNames from 'classnames';
 import React, { createRef, memo, useEffect, useState } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { areEqual, FixedSizeList, ListChildComponentProps } from 'react-window';
-import LeftArrowIcon from 'src/icons/LeftArrowIcon';
-import SearchIcon from 'src/icons/SearchIcon';
-import { PAIR_SELECTOR_TOP_TOKENS } from 'src/misc/constants';
+import LeftArrowIcon from '../icons/LeftArrowIcon';
+import SearchIcon from '../icons/SearchIcon';
+import { PAIR_SELECTOR_TOP_TOKENS } from '../misc/constants';
 
 import { useAccounts } from '../contexts/accounts';
 
 import FormPairRow from './FormPairRow';
-import { useUSDValueProvider } from 'src/contexts/USDValueProvider';
+import { useUSDValueProvider } from '../contexts/USDValueProvider';
 import Decimal from 'decimal.js';
 
 export const PAIR_ROW_HEIGHT = 72;

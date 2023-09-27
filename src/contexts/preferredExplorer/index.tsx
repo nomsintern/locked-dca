@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { Cluster } from '@solana/web3.js';
-import { DEFAULT_EXPLORER, IInit } from 'src/types';
+import { DEFAULT_EXPLORER, IInit } from '../../types';
 
 export const AVAILABLE_EXPLORER: {
   name: DEFAULT_EXPLORER;

@@ -13,7 +13,7 @@ import { SolflareWalletAdapter } from '@solana/wallet-adapter-solflare';
 import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack';
 import { GlowWalletAdapter } from '@solana/wallet-adapter-glow';
 import { PreferredExplorerProvider } from './preferredExplorer';
-import { IInit } from 'src/types';
+import { IInit } from '../types';
 
 const WalletContextProvider: FC<{ endpoint?: string; children: ReactNode }> = ({ endpoint, children }) => {
   const { autoConnect } = useAutoConnect();

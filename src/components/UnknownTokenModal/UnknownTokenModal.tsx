@@ -1,10 +1,10 @@
 import React from 'react';
 import { TokenInfo } from '@solana/spl-token-registry';
-import CloseIcon from 'src/icons/CloseIcon';
-import ExternalIcon from 'src/icons/ExternalIcon';
-import { usePreferredExplorer } from 'src/contexts/preferredExplorer';
+import CloseIcon from '../../icons/CloseIcon';
+import ExternalIcon from '../../icons/ExternalIcon';
+import { usePreferredExplorer } from '../../contexts/preferredExplorer';
 import TokenIcon from '../TokenIcon';
-import { shortenAddress } from 'src/misc/utils';
+import { shortenAddress } from '../../misc/utils';
 
 const UNKNOWN_TOKEN_LINK = 'https://docs.jup.ag/notes/getting-your-token-on-jupiter';
 const UnknownTokenModal: React.FC<{

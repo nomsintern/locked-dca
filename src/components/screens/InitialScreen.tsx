@@ -5,10 +5,10 @@ import Form from '../../components/Form';
 import FormPairSelector from '../../components/FormPairSelector';
 import { useAccounts } from '../../contexts/accounts';
 import { useTokenContext } from '../../contexts/TokenContextProvider';
-import { WalletModal } from 'src/components/WalletComponents/components/WalletModal';
-import { useSwapContext } from 'src/contexts/SwapContext';
-import { useScreenState } from 'src/contexts/ScreenProvider';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
+import { WalletModal } from '../../components/WalletComponents/components/WalletModal';
+import { useSwapContext } from '../../contexts/SwapContext';
+import { useScreenState } from '../../contexts/ScreenProvider';
+import { useWalletPassThrough } from '../../contexts/WalletPassthroughProvider';
 import OngoingDCA from '../OngoingDCA/OngoingDCA';
 
 interface Props {

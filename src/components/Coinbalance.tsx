@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
+import { useWalletPassThrough } from '../contexts/WalletPassthroughProvider';
 
 import { useAccounts } from '../contexts/accounts';
 

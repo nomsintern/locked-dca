@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import { useScreenState } from 'src/contexts/ScreenProvider';
-import { LOCKING_PLAN, useSwapContext } from 'src/contexts/SwapContext';
-import LeftArrowIcon from 'src/icons/LeftArrowIcon';
+import { useScreenState } from '../../contexts/ScreenProvider';
+import { LOCKING_PLAN, useSwapContext } from '../../contexts/SwapContext';
+import LeftArrowIcon from '../../icons/LeftArrowIcon';
 import JupButton from '../JupButton';
 import SexyChameleonText from '../SexyChameleonText/SexyChameleonText';
 import classNames from 'classnames';

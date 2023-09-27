@@ -3,9 +3,9 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { vs2015 } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import classNames from 'classnames';
 
-import { FormProps, IInit } from 'src/types';
-import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
-import { jsonToBase64 } from 'src/misc/utils';
+import { FormProps, IInit } from '../../types';
+import { IFormConfigurator, INITIAL_FORM_CONFIG } from '../../constants';
+import { jsonToBase64 } from '../../misc/utils';
 
 function addInlinesToCode(code: string, insertLines: string) {
   let lines = code.split('\n');

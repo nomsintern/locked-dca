@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import React, { useMemo, useState } from 'react';
-import { ParsedEscrow, useSwapContext } from 'src/contexts/SwapContext';
-import { useTokenContext } from 'src/contexts/TokenContextProvider';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
-import ChevronLeftIcon from 'src/icons/ChevronLeftIcon';
-import CloseIcon from 'src/icons/CloseIcon';
+import { ParsedEscrow, useSwapContext } from '../../contexts/SwapContext';
+import { useTokenContext } from '../../contexts/TokenContextProvider';
+import { useWalletPassThrough } from '../../contexts/WalletPassthroughProvider';
+import ChevronLeftIcon from '../../icons/ChevronLeftIcon';
+import CloseIcon from '../../icons/CloseIcon';
 import TokenIcon from '../TokenIcon';
 import Decimal from 'decimal.js';
 import Spinner from '../Spinner';

@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Rive, { Alignment, Fit, Layout } from '@rive-app/react-canvas';
 
-import { useScreenState } from 'src/contexts/ScreenProvider';
-import { useSwapContext } from 'src/contexts/SwapContext';
+import { useScreenState } from '../../contexts/ScreenProvider';
+import { useSwapContext } from '../../contexts/SwapContext';
 import JupButton from '../JupButton';
 import SexyChameleonText from '../SexyChameleonText/SexyChameleonText';
 import Spinner from '../Spinner';
-import SuccessIcon from 'src/icons/SuccessIcon';
-import { usePreferredExplorer } from 'src/contexts/preferredExplorer';
+import SuccessIcon from '../../icons/SuccessIcon';
+import { usePreferredExplorer } from '../../contexts/preferredExplorer';
 import TokenIcon from '../TokenIcon';
 
 const ErrorIcon = () => {

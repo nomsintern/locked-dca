@@ -5,9 +5,9 @@ import CoinBalance from './Coinbalance';
 import { PAIR_ROW_HEIGHT } from './FormPairSelector';
 import TokenIcon from './TokenIcon';
 import TokenLink from './TokenLink';
-import { useUSDValueProvider } from 'src/contexts/USDValueProvider';
+import { useUSDValueProvider } from '../contexts/USDValueProvider';
 import Decimal from 'decimal.js';
-import { useAccounts } from 'src/contexts/accounts';
+import { useAccounts } from '../contexts/accounts';
 
 const FormPairRow: React.FC<{
   item: TokenInfo;
