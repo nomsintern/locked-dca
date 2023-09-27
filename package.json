@@ -1,7 +1,6 @@
 {
   "name": "@jup-ag/terminal",
   "version": "1.0.7",
-  "private": false,
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
@@ -13,20 +12,23 @@
     "analyse": "NODE_ENV=production MODE=widget ANALYSE=true webpack"
   },
   "dependencies": {
+    "@coral-xyz/anchor": "^0.28.0",
+    "@jup-ag/dca-sdk": "^2.3.0",
     "@jup-ag/math": "4.0.0-beta.11",
     "@jup-ag/react-hook": "4.0.0-beta.17",
     "@project-serum/anchor": "^0.24.2",
     "@rive-app/react-canvas": "^3.0.33",
     "@solana/spl-token": "0.1.8",
     "@solana/spl-token-registry": "~0.2.1105",
+    "@solana/wallet-adapter-base": "^0.9.22",
     "@solana/wallet-adapter-backpack": "0.1.11",
-    "@solana/wallet-adapter-base": "0.9.20",
     "@solana/wallet-adapter-glow": "0.1.15",
     "@solana/wallet-adapter-phantom": "0.9.19",
-    "@solana/wallet-adapter-react": "0.15.28",
+    "@solana/wallet-adapter-react": "^0.15.32",
+    "@solana/wallet-adapter-react-ui": "^0.9.31",
     "@solana/wallet-adapter-solflare": "0.6.21",
-    "@solana/wallet-adapter-wallets": "0.19.10",
-    "@solana/web3.js": "1.73.0",
+    "@solana/wallet-adapter-wallets": "^0.19.16",
+    "@solana/web3.js": "^1.37.1",
     "@tanstack/react-query": "^4.29.7",
     "bn.js": "5.2.1",
     "bs58": "5.0.0",
@@ -36,8 +38,8 @@
     "jsbi": "4.3.0",
     "lodash.debounce": "^4.0.8",
     "next": "13.1.2",
-    "next-themes": "0.2.1",
     "next-seo": "5.15.0",
+    "next-themes": "0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.42.1",
@@ -45,9 +47,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-use": "^17.4.0",
     "react-virtualized-auto-sizer": "1.0.7",
-    "react-window": "1.8.8",
-    "@coral-xyz/anchor": "^0.28.0",
-    "@jup-ag/dca-sdk": "^2.3.0"
+    "react-window": "1.8.8"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.0",
