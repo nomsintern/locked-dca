@@ -32,10 +32,10 @@ const { wallet } = useWallet();
   })();
   
   // Filter out the key that's not default
-  const filteredFormProps = Object.keys(formConfigurator.formProps).reduce<Partial<FormProps>>((acc, key) => {
+  const filteredFormProps = Object.keys(formConfigurator.formProps).reduce<Partial<FormProps>>((acc: any, key) => {
     const itemKey = key as keyof FormProps;
     if (formConfigurator.formProps[itemKey] !== INITIAL_FORM_CONFIG.formProps[itemKey]) {
-      acc[itemKey] = formConfigurator.formProps[itemKey] as any;
+      acc[itemKey] = formConfigurator.formProps[itemKey] as unknown as any;
     }
     return acc;
   }, {})
