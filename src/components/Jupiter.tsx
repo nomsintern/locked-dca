@@ -4,7 +4,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import { useScreenState } from 'src/contexts/ScreenProvider';
-import { SwapContextProvider } from 'src/contexts/SwapContext';
+import { AppContext } from 'src/contexts/AppContext';
 import { ROUTE_CACHE_DURATION } from 'src/misc/constants';
 import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
 import { IInit } from 'src/types';
@@ -70,7 +70,7 @@ const JupiterApp = (props: IInit) => {
             platformFeeAndAccounts={platformFeeAndAccounts}
             asLegacyTransaction={asLegacyTransaction}
           >
-            <SwapContextProvider
+            <AppContext
               displayMode={displayMode}
               formProps={formProps}
               scriptDomain={props.scriptDomain}
@@ -80,7 +80,7 @@ const JupiterApp = (props: IInit) => {
               <USDValueProvider>
                 <Content />
               </USDValueProvider>
-            </SwapContextProvider>
+            </AppContext>
           </JupiterProvider>
         </SlippageConfigProvider>
       </AccountsProvider>

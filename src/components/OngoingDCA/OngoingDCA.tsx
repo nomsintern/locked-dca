@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useMemo, useState } from 'react';
-import { ParsedEscrow, useSwapContext } from 'src/contexts/SwapContext';
+import { ParsedEscrow, useAppContext } from 'src/contexts/AppContext';
 import { useTokenContext } from 'src/contexts/TokenContextProvider';
 import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
 import ChevronLeftIcon from 'src/icons/ChevronLeftIcon';
@@ -11,7 +11,7 @@ import Spinner from '../Spinner';
 
 const DCAItem: React.FC<{ item: ParsedEscrow }> = ({ item }) => {
   const { tokenMap } = useTokenContext();
-  const { onClose } = useSwapContext();
+  const { onClose } = useAppContext();
 
   const inputMint = useMemo(() => item.parsed?.account.inputMint, [item]);
   const outputMint = useMemo(() => item.parsed?.account.outputMint, [item]);
@@ -93,7 +93,7 @@ const DCAItem: React.FC<{ item: ParsedEscrow }> = ({ item }) => {
 const DCAList: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const {
     dca: { escrows },
-  } = useSwapContext();
+  } = useAppContext();
 
   if (!escrows) return null;
 
@@ -138,7 +138,7 @@ const OngoingDCA = () => {
   const { wallet } = useWalletPassThrough();
   const {
     dca: { escrows },
-  } = useSwapContext();
+  } = useAppContext();
 
   const [showOngoingDCA, setShowOngoingDCA] = useState(false);
 

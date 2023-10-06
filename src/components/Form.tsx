@@ -21,8 +21,7 @@ import JupButton from './JupButton';
 import SexyChameleonText from './SexyChameleonText/SexyChameleonText';
 import useJupiterSwapPriceFetcher from 'src/hooks/useJupiterSwapPriceFetcher';
 import Decimal from 'decimal.js';
-import { ILockingPlan, LOCKING_PLAN, useSwapContext } from 'src/contexts/SwapContext';
-import { setupDCA } from 'src/dca';
+import { ILockingPlan, LOCKING_PLAN, useAppContext } from 'src/contexts/AppContext';
 
 
 
@@ -42,7 +41,7 @@ const Form: React.FC<{
     fromTokenInfo,
     toTokenInfo,
     dca: { program, dcaClient, provider },
-  } = useSwapContext();
+  } = useAppContext();
 
   const loading = false;
 

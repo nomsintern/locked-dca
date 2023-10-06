@@ -172,7 +172,7 @@ export const LOCKING_PLAN: ILockingPlan[] = [
 
 export const SwapContext = createContext<ISwapContext>(initialSwapContext);
 
-export function useSwapContext(): ISwapContext {
+export function useAppContext(): ISwapContext {
   return useContext(SwapContext);
 }
 
@@ -182,7 +182,7 @@ export const PRIORITY_HIGH = 0.000_005; // Additional fee of 1x base fee
 export const PRIORITY_TURBO = 0.000_5; // Additional fee of 100x base fee
 export const PRIORITY_MAXIMUM_SUGGESTED = 0.01;
 
-export const SwapContextProvider: FC<{
+export const AppContext: FC<{
   displayMode: IInit['displayMode'];
   scriptDomain?: string;
   asLegacyTransaction: boolean;
