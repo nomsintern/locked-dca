@@ -29,7 +29,7 @@ const Header: React.FC<{ setIsWalletModalOpen(toggle: boolean): void }> = ({ set
             <RefreshSVG />
           </button>
 
-          <WalletButton setIsWalletModalOpen={setIsWalletModalOpen} />
+          {/* <WalletButton setIsWalletModalOpen={setIsWalletModalOpen} /> */}
         </div>
       </div>
     </div>

@@ -88,14 +88,14 @@ const FormPairSelector = ({
       </div>
 
       <div
-        className="flex px-5 mt-4 w-[98%] rounded-xl bg-[#212128]"
+        className="flex px-5 mt-4 w-[98%] rounded-xl bg-bonk-gray"
         style={{ height: SEARCH_BOX_HEIGHT, maxHeight: SEARCH_BOX_HEIGHT }}
       >
         <SearchIcon />
 
         <input
           autoComplete="off"
-          className="w-full rounded-xl ml-4 truncate bg-[#212128] text-white/50 placeholder:text-white/20"
+          className="w-full rounded-xl ml-4 truncate bg-bonk-gray text-white/50 placeholder:text-white/20"
           placeholder={`Search`}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

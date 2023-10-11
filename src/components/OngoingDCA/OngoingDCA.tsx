@@ -100,7 +100,7 @@ const DCAList: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const { active, finished, closed } = escrows;
 
   return (
-    <div className={classNames('w-full rounded-xl flex flex-col bg-jupiter-bg text-white shadow-xl max-h-[90%]')}>
+    <div className={classNames('w-full rounded-xl flex flex-col bg-bonk-dark-brown text-white shadow-xl max-h-[90%]')}>
       <div className="flex justify-between items-center p-4 border-b border-white/10">
         <div className="text-sm font-semibold">
           <span>All orders</span>

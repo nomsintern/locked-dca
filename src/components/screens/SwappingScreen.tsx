@@ -189,9 +189,7 @@ const SwappingScreen = () => {
 
         <div className="mt-auto px-5 pb-4 flex space-x-2">
           <JupButton size="lg" className="w-full mt-4" type="button" onClick={onSwapMore}>
-            <SexyChameleonText>
-              <span className="text-sm">Go Back</span>
-            </SexyChameleonText>
+            <span>Go Back</span>
           </JupButton>
 
           {displayMode !== 'integrated' ? (
@@ -216,7 +214,7 @@ const SwappingScreen = () => {
             {errorMessage ? <p className="text-white/50 text-xs mt-2">{errorMessage}</p> : ''}
 
             <JupButton size="lg" className="w-full mt-6 disabled:opacity-50" type="button" onClick={onGoBack}>
-              <SexyChameleonText>Retry</SexyChameleonText>
+              <span>Retry</span>
             </JupButton>
           </div>
         </div>

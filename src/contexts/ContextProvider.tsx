@@ -27,6 +27,12 @@ const WalletContextProvider: FC<{ endpoint?: string; children: ReactNode }> = ({
   })();
 
   const wallets = useMemo(() => {
+
+
+
+    console.log('///////////////////////////////////////////////////////// locked-dca wallets context')
+
+
     if (passThroughWallet) {
       return [];
     }

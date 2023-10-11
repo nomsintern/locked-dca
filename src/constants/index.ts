@@ -34,7 +34,7 @@ export interface IFormConfigurator {
 export const INITIAL_FORM_CONFIG: IFormConfigurator = Object.freeze({
   useWalletPassthrough: false,
   strictTokenList: true,
-  defaultExplorer: 'Solana Explorer',
+  defaultExplorer: 'Solscan',
   formProps: {
     fixedInputMint: false,
     fixedOutputMint: false,

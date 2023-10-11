@@ -40,7 +40,7 @@ const ConfirmationScreen = () => {
 
       <div
         className={classNames(
-          'mt-4 space-y-2 border border-white/5 rounded-xl p-3 text-white flex flex-col items-center text-sm',
+          'mt-4 space-y-2 border border-bonk-light-border rounded-xl p-3 text-white flex flex-col items-center text-sm',
         )}
       >
         <span className='font-semibold'>Plan: {plan?.name}</span>
@@ -50,7 +50,7 @@ const ConfirmationScreen = () => {
       </div>
 
       <JupButton size="lg" className="w-full mt-4 disabled:opacity-50" type="button" onClick={onSubmit}>
-        <SexyChameleonText>Confirm</SexyChameleonText>
+        <span>Confirm</span>
       </JupButton>
     </div>
   );
