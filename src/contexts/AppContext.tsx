@@ -24,8 +24,7 @@ import { useAccounts } from './accounts';
 import Decimal from 'decimal.js';
 import { findByUser, setupDCA } from 'src/dca';
 import { BN } from 'bn.js';
-import { TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
-import { ASSOCIATED_PROGRAM_ID } from '@project-serum/anchor/dist/cjs/utils/token';
+import { getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { useQuery } from '@tanstack/react-query';
 
 export interface IForm {
@@ -327,9 +326,7 @@ export const AppContext: FC<{
     try {
       const frequency = plan.numberOfTrade;
       const inAmount = new Decimal(form.fromValue).mul(10 ** fromTokenInfo.decimals);
-      const userInTokenAccount = await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      const userInTokenAccount = await getAssociatedTokenAddressSync(
         new PublicKey(form.fromMint),
         walletPublicKey,
       );
@@ -381,25 +378,19 @@ export const AppContext: FC<{
             inputMint,
             outputMint,
             user: new PublicKey(walletPublicKey),
-            userTokenAccount: await Token.getAssociatedTokenAddress(
-              ASSOCIATED_PROGRAM_ID,
-              TOKEN_PROGRAM_ID,
+            userTokenAccount: await getAssociatedTokenAddressSync(
               outputMint,
               new PublicKey(walletPublicKey),
               false,
             ),
             escrow,
             dca,
-            escrowInAta: await Token.getAssociatedTokenAddress(
-              ASSOCIATED_PROGRAM_ID,
-              TOKEN_PROGRAM_ID,
+            escrowInAta: await getAssociatedTokenAddressSync(
               inputMint,
               escrow,
               true,
             ),
-            escrowOutAta: await Token.getAssociatedTokenAddress(
-              ASSOCIATED_PROGRAM_ID,
-              TOKEN_PROGRAM_ID,
+            escrowOutAta: await getAssociatedTokenAddressSync(
               outputMint,
               escrow,
               true,

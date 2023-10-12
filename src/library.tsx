@@ -78,7 +78,7 @@ const RenderLoadableJupiter = (props: IInit) => {
   useEffect(() => {
     loadJupiter();
 
-    let intervalId: NodeJS.Timer;
+    let intervalId: NodeJS.Timeout | undefined = undefined;
     if (!loaded) {
       intervalId = setInterval(() => {
         const instance = (window as any).JupiterRenderer?.RenderJupiter;
@@ -223,6 +223,7 @@ const RenderWidgetShell = (props: IInit) => {
 };
 
 async function init(props: IInit) {
+  
   const { passThroughWallet, onSwapError, onSuccess, integratedTargetId, ...restProps } = props;
   const targetDiv = document.createElement('div');
   const instanceExist = document.getElementById(containerId);

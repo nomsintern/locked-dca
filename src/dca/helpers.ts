@@ -1,4 +1,4 @@
-import { TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
+import { createAssociatedTokenAccountInstruction, getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { Connection, PublicKey, TransactionInstruction } from '@solana/web3.js';
 import { BN } from '@coral-xyz/anchor';
 import { ASSOCIATED_PROGRAM_ID } from '@project-serum/anchor/dist/cjs/utils/token';
@@ -18,9 +18,7 @@ export async function getOrCreateATAInstruction(
   allowOwnerOffCurve = true,
 ): Promise<GetOrCreateATAResponse> {
   try {
-    const toAccount = await Token.getAssociatedTokenAddress(
-      ASSOCIATED_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    const toAccount = await getAssociatedTokenAddressSync(
       tokenMint,
       owner,
       allowOwnerOffCurve,
@@ -30,9 +28,7 @@ export async function getOrCreateATAInstruction(
 
     if (account) return { ataPubKey: toAccount, ix: undefined };
 
-    const ix = Token.createAssociatedTokenAccountInstruction(
-      ASSOCIATED_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    const ix = createAssociatedTokenAccountInstruction(
       payer,
       toAccount,
       owner,
