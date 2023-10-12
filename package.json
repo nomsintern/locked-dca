@@ -18,8 +18,6 @@
     "@jup-ag/react-hook": "4.0.0-beta.17",
     "@project-serum/anchor": "^0.24.2",
     "@rive-app/react-canvas": "^3.0.33",
-    "@solana/buffer-layout": "4.0.1",
-    "@solana/buffer-layout-utils": "0.2.0",
     "@solana/spl-token": "^0.3.8",
     "@solana/spl-token-registry": "^0.2.819",
     "@solana/wallet-adapter-base": "^0.9.23",
@@ -85,17 +83,16 @@
   },
   "pnpm": {
     "overrides": {
-      "@solana/web3.js": "1.73.0",
-      "@solana/buffer-layout": "4.0.0"
+      "@solana/web3.js": "1.77.3"
     }
   },
   "resolutions": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@solana/buffer-layout": "4.0.1",
     "@types/node": "^20.2.0",
     "@types/react": "^18.2.13",
     "@types/react-dom": "^18.2.6",
-    "@solana/spl-token": "0.3.8"
+    "@solana/spl-token": "0.3.8",
+    "@solana/web3.js": "1.77.3"
   }
 }
