@@ -21,8 +21,7 @@ import JupButton from './JupButton';
 import SexyChameleonText from './SexyChameleonText/SexyChameleonText';
 import useJupiterSwapPriceFetcher from 'src/hooks/useJupiterSwapPriceFetcher';
 import Decimal from 'decimal.js';
-import { ILockingPlan, LOCKING_PLAN, useSwapContext } from 'src/contexts/SwapContext';
-import { setupDCA } from 'src/dca';
+import { ILockingPlan, LOCKING_PLAN, useAppContext } from 'src/contexts/AppContext';
 
 
 
@@ -42,7 +41,7 @@ const Form: React.FC<{
     fromTokenInfo,
     toTokenInfo,
     dca: { program, dcaClient, provider },
-  } = useSwapContext();
+  } = useAppContext();
 
   const loading = false;
 
@@ -65,18 +64,6 @@ const Form: React.FC<{
     if (isInvalid) return;
 
     setForm((form) => ({ ...form, fromValue: value }));
-  };
-
-  const onChangeToValue = (value: string) => {
-    if (value === '') {
-      setForm((form) => ({ ...form, fromValue: '', toValue: '' }));
-      return;
-    }
-
-    const isInvalid = Number.isNaN(value);
-    if (isInvalid) return;
-
-    setForm((form) => ({ ...form, toValue: value }));
   };
 
   const balance = useMemo(() => {
@@ -108,10 +95,6 @@ const Form: React.FC<{
     setSelectPairSelector('fromMint');
   }, []);
 
-  const onClickSelectToMint = useCallback(() => {
-    setSelectPairSelector('toMint');
-  }, []);
-
   const thousandSeparator = useMemo(() => (detectedSeparator === ',' ? '.' : ','), []);
   // Allow empty input, and input lower than max limit
   const withValueLimit = useCallback(
@@ -121,7 +104,6 @@ const Form: React.FC<{
 
   const lastRefreshTimestampSwapPrice = useRef<number>(0);
   const { fetchPrice } = useJupiterSwapPriceFetcher();
-  const [selectedPlan, setSelectedPlan] = useState<ILockingPlan['name']>('5 minutes');
   const [swapMarketPrice, setSwapMarketPrice] = useState<Decimal | undefined>(undefined);
   const refreshSwapMarketPrice = useCallback(async () => {
     if (!fromTokenInfo || !toTokenInfo) return;
@@ -146,6 +128,8 @@ const Form: React.FC<{
   useEffect(() => {
     refreshSwapMarketPrice();
   }, [fromTokenInfo]);
+
+  const selectedPlan = useMemo(() => LOCKING_PLAN.find((plan) => plan.name === form.selectedPlan)?.name, [form.selectedPlan]);
 
   return (
     <div className="h-full flex flex-col items-center pb-4">
@@ -222,7 +206,7 @@ const Form: React.FC<{
               return (
                 <div
                   key={item.name}
-                  onClick={() => setSelectedPlan(item.name)}
+                  onClick={() => setForm(prev => ({ ...prev, selectedPlan: item.name }))}
                   className={classNames(
                     'w-full p-3 flex flex-col items-center justify-center space-y-2 bg-[#212128] rounded-xl cursor-pointer',
                     selectedPlan === item.name ? 'border border-jupiter-jungle-green' : 'border border-transparent',

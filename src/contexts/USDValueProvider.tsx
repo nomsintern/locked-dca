@@ -4,7 +4,7 @@ import { useDebounce, useLocalStorage } from 'react-use';
 import { splitIntoChunks } from 'src/misc/utils';
 import { useAccounts } from './accounts';
 import { useTokenContext } from './TokenContextProvider';
-import { useSwapContext } from './SwapContext';
+import { useAppContext } from './AppContext';
 
 const MAXIMUM_PARAM_SUPPORT = 100;
 const CACHE_EXPIRE_TIME = 1000 * 60 * 1; // 1 min
@@ -45,7 +45,7 @@ export const USDValueProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const { accounts } = useAccounts();
   const { tokenMap } = useTokenContext();
   const { fromTokenInfo, toTokenInfo,
-  } = useSwapContext();
+  } = useAppContext();
 
   const [cachedPrices, setCachedPrices] = useLocalStorage<ITokenUSDValue>(STORAGE_KEY, {});
   const [addresses, setAddresses] = useState<Set<string>>(new Set());

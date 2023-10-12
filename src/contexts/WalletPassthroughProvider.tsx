@@ -1,6 +1,6 @@
 import { WalletName, WalletReadyState } from '@solana/wallet-adapter-base';
 import { useWallet, Wallet } from '@solana/wallet-adapter-react';
-import { SolflareWalletName } from '@solana/wallet-adapter-solflare';
+//import { SolflareWalletName } from '@solana/wallet-adapter-solflare';
 import { PublicKey } from '@solana/web3.js';
 import React, { createContext, FC, ReactNode, useContext, useMemo } from 'react';
 

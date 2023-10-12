@@ -6,7 +6,7 @@ import FormPairSelector from '../../components/FormPairSelector';
 import { useAccounts } from '../../contexts/accounts';
 import { useTokenContext } from '../../contexts/TokenContextProvider';
 import { WalletModal } from 'src/components/WalletComponents/components/WalletModal';
-import { useSwapContext } from 'src/contexts/SwapContext';
+import { useAppContext } from 'src/contexts/AppContext';
 import { useScreenState } from 'src/contexts/ScreenProvider';
 import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
 import OngoingDCA from '../OngoingDCA/OngoingDCA';
@@ -25,7 +25,7 @@ const InitialScreen = ({ setIsWalletModalOpen, isWalletModalOpen }: Props) => {
     setForm,
     setErrors,
     formProps: { initialOutputMint, fixedOutputMint },
-  } = useSwapContext();
+  } = useAppContext();
   const { setScreen } = useScreenState();
 
   const walletPublicKey = useMemo(() => wallet?.adapter.publicKey?.toString(), [wallet?.adapter.publicKey]);

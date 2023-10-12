@@ -179,6 +179,57 @@ export type DcaIntegration = {
       ];
       args: [];
     },
+    {
+      name: 'airdrop';
+      accounts: [
+        {
+          name: 'admin';
+          isMut: true;
+          isSigner: true;
+        },
+        {
+          name: 'user';
+          isMut: false;
+          isSigner: false;
+        },
+        {
+          name: 'escrow';
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: 'outputMint';
+          isMut: false;
+          isSigner: false;
+        },
+        {
+          name: 'adminTokenAccount';
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: 'userTokenAccount';
+          isMut: true;
+          isSigner: false;
+        },
+        {
+          name: 'systemProgram';
+          isMut: false;
+          isSigner: false;
+        },
+        {
+          name: 'tokenProgram';
+          isMut: false;
+          isSigner: false;
+        },
+        {
+          name: 'associatedTokenProgram';
+          isMut: false;
+          isSigner: false;
+        },
+      ];
+      args: [];
+    },
   ];
   accounts: [
     {
@@ -215,7 +266,15 @@ export type DcaIntegration = {
             type: 'u64';
           },
           {
+            name: 'airdropAmount';
+            type: 'u64';
+          },
+          {
             name: 'completed';
+            type: 'bool';
+          },
+          {
+            name: 'airdropped';
             type: 'bool';
           },
           {
@@ -234,8 +293,33 @@ export type DcaIntegration = {
     },
     {
       code: 6001;
+      name: 'DCANotComplete';
+      msg: 'DCA Not Complete';
+    },
+    {
+      code: 6002;
+      name: 'Airdropped';
+      msg: 'Already airdropped';
+    },
+    {
+      code: 6003;
+      name: 'UnexpectedAirdropAmount';
+      msg: 'Unexpected airdrop amount';
+    },
+    {
+      code: 6004;
       name: 'UnexpectedBalance';
       msg: 'Unexpected Balance';
+    },
+    {
+      code: 6005;
+      name: 'InsufficientBalance';
+      msg: 'Insufficient Balance';
+    },
+    {
+      code: 6006;
+      name: 'MathOverflow';
+      msg: 'Overflow';
     },
   ];
 };
@@ -421,6 +505,57 @@ export const IDL: DcaIntegration = {
       ],
       args: [],
     },
+    {
+      name: 'airdrop',
+      accounts: [
+        {
+          name: 'admin',
+          isMut: true,
+          isSigner: true,
+        },
+        {
+          name: 'user',
+          isMut: false,
+          isSigner: false,
+        },
+        {
+          name: 'escrow',
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: 'outputMint',
+          isMut: false,
+          isSigner: false,
+        },
+        {
+          name: 'adminTokenAccount',
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: 'userTokenAccount',
+          isMut: true,
+          isSigner: false,
+        },
+        {
+          name: 'systemProgram',
+          isMut: false,
+          isSigner: false,
+        },
+        {
+          name: 'tokenProgram',
+          isMut: false,
+          isSigner: false,
+        },
+        {
+          name: 'associatedTokenProgram',
+          isMut: false,
+          isSigner: false,
+        },
+      ],
+      args: [],
+    },
   ],
   accounts: [
     {
@@ -457,7 +592,15 @@ export const IDL: DcaIntegration = {
             type: 'u64',
           },
           {
+            name: 'airdropAmount',
+            type: 'u64',
+          },
+          {
             name: 'completed',
+            type: 'bool',
+          },
+          {
+            name: 'airdropped',
             type: 'bool',
           },
           {
@@ -476,8 +619,33 @@ export const IDL: DcaIntegration = {
     },
     {
       code: 6001,
+      name: 'DCANotComplete',
+      msg: 'DCA Not Complete',
+    },
+    {
+      code: 6002,
+      name: 'Airdropped',
+      msg: 'Already airdropped',
+    },
+    {
+      code: 6003,
+      name: 'UnexpectedAirdropAmount',
+      msg: 'Unexpected airdrop amount',
+    },
+    {
+      code: 6004,
       name: 'UnexpectedBalance',
       msg: 'Unexpected Balance',
+    },
+    {
+      code: 6005,
+      name: 'InsufficientBalance',
+      msg: 'Insufficient Balance',
+    },
+    {
+      code: 6006,
+      name: 'MathOverflow',
+      msg: 'Overflow',
     },
   ],
 };

@@ -24,8 +24,7 @@ import { useAccounts } from './accounts';
 import Decimal from 'decimal.js';
 import { findByUser, setupDCA } from 'src/dca';
 import { BN } from 'bn.js';
-import { TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
-import { ASSOCIATED_PROGRAM_ID } from '@project-serum/anchor/dist/cjs/utils/token';
+import { getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { useQuery } from '@tanstack/react-query';
 
 export interface IForm {
@@ -172,7 +171,7 @@ export const LOCKING_PLAN: ILockingPlan[] = [
 
 export const SwapContext = createContext<ISwapContext>(initialSwapContext);
 
-export function useSwapContext(): ISwapContext {
+export function useAppContext(): ISwapContext {
   return useContext(SwapContext);
 }
 
@@ -182,7 +181,7 @@ export const PRIORITY_HIGH = 0.000_005; // Additional fee of 1x base fee
 export const PRIORITY_TURBO = 0.000_5; // Additional fee of 100x base fee
 export const PRIORITY_MAXIMUM_SUGGESTED = 0.01;
 
-export const SwapContextProvider: FC<{
+export const AppContext: FC<{
   displayMode: IInit['displayMode'];
   scriptDomain?: string;
   asLegacyTransaction: boolean;
@@ -327,9 +326,7 @@ export const SwapContextProvider: FC<{
     try {
       const frequency = plan.numberOfTrade;
       const inAmount = new Decimal(form.fromValue).mul(10 ** fromTokenInfo.decimals);
-      const userInTokenAccount = await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      const userInTokenAccount = await getAssociatedTokenAddressSync(
         new PublicKey(form.fromMint),
         walletPublicKey,
       );
@@ -381,25 +378,19 @@ export const SwapContextProvider: FC<{
             inputMint,
             outputMint,
             user: new PublicKey(walletPublicKey),
-            userTokenAccount: await Token.getAssociatedTokenAddress(
-              ASSOCIATED_PROGRAM_ID,
-              TOKEN_PROGRAM_ID,
+            userTokenAccount: await getAssociatedTokenAddressSync(
               outputMint,
               new PublicKey(walletPublicKey),
               false,
             ),
             escrow,
             dca,
-            escrowInAta: await Token.getAssociatedTokenAddress(
-              ASSOCIATED_PROGRAM_ID,
-              TOKEN_PROGRAM_ID,
+            escrowInAta: await getAssociatedTokenAddressSync(
               inputMint,
               escrow,
               true,
             ),
-            escrowOutAta: await Token.getAssociatedTokenAddress(
-              ASSOCIATED_PROGRAM_ID,
-              TOKEN_PROGRAM_ID,
+            escrowOutAta: await getAssociatedTokenAddressSync(
               outputMint,
               escrow,
               true,

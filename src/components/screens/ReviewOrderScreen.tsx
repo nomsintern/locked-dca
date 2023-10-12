@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useScreenState } from 'src/contexts/ScreenProvider';
-import { LOCKING_PLAN, useSwapContext } from 'src/contexts/SwapContext';
+import { LOCKING_PLAN, useAppContext } from 'src/contexts/AppContext';
 import LeftArrowIcon from 'src/icons/LeftArrowIcon';
 import JupButton from '../JupButton';
 import SexyChameleonText from '../SexyChameleonText/SexyChameleonText';
@@ -13,7 +13,7 @@ const ConfirmationScreen = () => {
     toTokenInfo,
     onSubmit: onSubmitLocking,
     dca: {},
-  } = useSwapContext();
+  } = useAppContext();
 
   const { setScreen } = useScreenState();
   const onGoBack = () => {

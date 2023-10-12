@@ -11,7 +11,7 @@ import Footer from 'src/components/Footer/Footer';
 import { IInit } from 'src/types';
 import { IFormConfigurator, INITIAL_FORM_CONFIG, JUPITER_DEFAULT_RPC } from 'src/constants';
 import { Wallet } from '@solana/wallet-adapter-react';
-import { UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
+
 import { WalletReadyState } from '@solana/wallet-adapter-base';
 import { useForm } from 'react-hook-form';
 import { WalletButton } from 'src/components/WalletComponents';
@@ -63,7 +63,7 @@ export default function App({ Component, pageProps }: AppProps) {
     }
 
     const fakeWallet: Wallet = {
-      adapter: new UnsafeBurnerWalletAdapter(),
+      adapter: {} as unknown as any,
       readyState: WalletReadyState.Installed,
     };
 

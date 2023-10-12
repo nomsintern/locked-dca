@@ -1,8 +1,7 @@
 import { Program } from '@coral-xyz/anchor';
 import { DCA, DCA_PROGRAM_ID_BY_CLUSTER } from '@jup-ag/dca-sdk';
 import { web3 } from '@project-serum/anchor';
-import { ASSOCIATED_PROGRAM_ID } from '@project-serum/anchor/dist/cjs/utils/token';
-import { NATIVE_MINT, TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
+import { NATIVE_MINT, getAssociatedTokenAddressSync, createSyncNativeInstruction } from '@solana/spl-token';
 import { ComputeBudgetProgram, Connection, PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js';
 import BN from 'bn.js';
 import { deriveEscrow, getOrCreateATAInstruction } from './helpers';
@@ -49,7 +48,7 @@ export async function setupDCA({
       toPubkey: ataPubKey,
     });
     // This is not exposed by the types, but indeed it exists
-    const syncNativeIX = (Token as any).createSyncNativeInstruction(ataPubKey);
+    const syncNativeIX = createSyncNativeInstruction(ataPubKey);
 
     if (ix) {
       preInstructions.push(ix);
@@ -63,32 +62,24 @@ export async function setupDCA({
     userTokenAccount: userInTokenAccount,
     jupDcaProgram: DCA_PROGRAM_ID_BY_CLUSTER['mainnet-beta'],
     jupDca: dcaPubKey,
-    jupDcaInAta: await Token.getAssociatedTokenAddress(
-      ASSOCIATED_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    jupDcaInAta: await getAssociatedTokenAddressSync(
       inputMint,
       dcaPubKey,
       true,
     ),
-    jupDcaOutAta: await Token.getAssociatedTokenAddress(
-      ASSOCIATED_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    jupDcaOutAta: await getAssociatedTokenAddressSync(
       outputMint,
       dcaPubKey,
       true,
     ),
     jupDcaEventAuthority: new PublicKey('Cspp27eGUDMXxPEdhmEXFVRn6Lt1L7xJyALF3nmnWoBj'),
     escrow,
-    escrowInAta: await Token.getAssociatedTokenAddress(
-      ASSOCIATED_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    escrowInAta: await getAssociatedTokenAddressSync(
       inputMint,
       escrow,
       true,
     ),
-    escrowOutAta: await Token.getAssociatedTokenAddress(
-      ASSOCIATED_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    escrowOutAta: await getAssociatedTokenAddressSync(
       outputMint,
       escrow,
       true,
@@ -104,32 +95,24 @@ export async function setupDCA({
       userTokenAccount: userInTokenAccount,
       jupDcaProgram: DCA_PROGRAM_ID_BY_CLUSTER['mainnet-beta'],
       jupDca: dcaPubKey,
-      jupDcaInAta: await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      jupDcaInAta: await getAssociatedTokenAddressSync(
         inputMint,
         dcaPubKey,
         true,
       ),
-      jupDcaOutAta: await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      jupDcaOutAta: await getAssociatedTokenAddressSync(
         outputMint,
         dcaPubKey,
         true,
       ),
       jupDcaEventAuthority: new PublicKey('Cspp27eGUDMXxPEdhmEXFVRn6Lt1L7xJyALF3nmnWoBj'),
       escrow,
-      escrowInAta: await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      escrowInAta: await getAssociatedTokenAddressSync(
         inputMint,
         escrow,
         true,
       ),
-      escrowOutAta: await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      escrowOutAta: await getAssociatedTokenAddressSync(
         outputMint,
         escrow,
         true,
@@ -168,25 +151,19 @@ export async function close({
       inputMint,
       outputMint,
       user: userPublicKey,
-      userTokenAccount: await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      userTokenAccount: await getAssociatedTokenAddressSync(
         outputMint,
         userPublicKey,
         false,
       ),
       escrow,
       dca,
-      escrowInAta: await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      escrowInAta: await getAssociatedTokenAddressSync(
         inputMint,
         escrow,
         true,
       ),
-      escrowOutAta: await Token.getAssociatedTokenAddress(
-        ASSOCIATED_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      escrowOutAta: await getAssociatedTokenAddressSync(
         outputMint,
         escrow,
         true,

@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
-import { useSwapContext } from 'src/contexts/SwapContext';
+import { useAppContext } from 'src/contexts/AppContext';
 
 import JupiterLogo from '../icons/JupiterLogo';
 import { WalletButton } from './WalletComponents';
 import RefreshSVG from 'src/icons/RefreshSVG';
 
 const Header: React.FC<{ setIsWalletModalOpen(toggle: boolean): void }> = ({ setIsWalletModalOpen }) => {
-  const { form, refresh } = useSwapContext();
+  const { form, refresh } = useAppContext();
 
   const jupiterDirectLink = useMemo(() => {
     return `https://jup.ag/swap/${form.fromMint}-${form.toMint}?inAmount=${form.fromValue}`;

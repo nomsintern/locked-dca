@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Rive, { Alignment, Fit, Layout } from '@rive-app/react-canvas';
 
 import { useScreenState } from 'src/contexts/ScreenProvider';
-import { useSwapContext } from 'src/contexts/SwapContext';
+import { useAppContext } from 'src/contexts/AppContext';
 import JupButton from '../JupButton';
 import SexyChameleonText from '../SexyChameleonText/SexyChameleonText';
 import Spinner from '../Spinner';
@@ -42,7 +42,7 @@ const SwappingScreen = () => {
     fromTokenInfo,
     toTokenInfo,
     form,
-  } = useSwapContext();
+  } = useAppContext();
   const { screen, setScreen } = useScreenState();
 
   const [errorMessage, setErrorMessage] = useState('');
