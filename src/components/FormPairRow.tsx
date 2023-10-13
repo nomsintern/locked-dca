@@ -5,9 +5,9 @@ import CoinBalance from './Coinbalance';
 import { PAIR_ROW_HEIGHT } from './FormPairSelector';
 import TokenIcon from './TokenIcon';
 import TokenLink from './TokenLink';
-import { useUSDValueProvider } from 'src/contexts/USDValueProvider';
+import { useUSDValueProvider } from '../contexts/USDValueProvider';
 import Decimal from 'decimal.js';
-import { useAccounts } from 'src/contexts/accounts';
+import { useAccounts } from '../contexts/accounts';
 
 const FormPairRow: React.FC<{
   item: TokenInfo;
@@ -35,7 +35,7 @@ const FormPairRow: React.FC<{
       translate="no"
     >
       <div
-        className="flex items-center rounded-xl space-x-4 my-2 p-3 justify-between bg-[#2C2D33] hover:bg-black/10"
+        className="flex items-center rounded-xl space-x-4 my-2 p-3 justify-between bg-bonk-primary-orange hover:bg-bonk-primary-hover"
         onClick={() => onSubmit(item)}
       >
         <div className="flex-shrink-0">
@@ -46,13 +46,13 @@ const FormPairRow: React.FC<{
 
         <div className="flex-1 min-w-0">
           <div className='flex flex-row space-x-2'>
-            <p className="text-sm text-white truncate">
+            <p className="text-sm text-gray-700 font-medium truncate">
               {item.symbol}
             </p>
             <TokenLink tokenInfo={item} />
           </div>
 
-          <div className="mt-1 text-xs text-gray-500 truncate flex space-x-1">
+          <div className="mt-1 text-xs text-gray-700 truncate flex space-x-1">
             <CoinBalance mintAddress={item.address} />
 
             {totalUsdValue && totalUsdValue.gt(0.01) ? (

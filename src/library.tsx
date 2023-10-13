@@ -114,7 +114,7 @@ const RenderShell = (props: IInit) => {
     if (!displayMode || displayMode === 'modal') {
       return 'fixed top-0 w-screen h-screen flex items-center justify-center bg-black/50';
     } else if (displayMode === 'integrated' || displayMode === 'widget') {
-      return 'flex items-center justify-center w-full h-full';
+      return `flex items-center justify-center w-full h-full rounded-xl p-1 bg-bonk-dark-base`;
     }
   }, [displayMode]);
 
@@ -213,7 +213,7 @@ const RenderWidgetShell = (props: IInit) => {
       <div
         id="integrated-terminal"
         className={`absolute overflow-hidden ${classes.contentClassName
-          } flex flex-col w-[90vw] h-[600px] max-w-[384px] max-h-[75vh] rounded-2xl bg-jupiter-bg transition-opacity duration-300 shadow-2xl ${!isOpen ? 'h-0 opacity-0' : 'opacity-100'
+          } flex flex-col w-[90vw] h-[600px] max-w-[384px] max-h-[75vh] rounded-2xl bg-bonk-dark-brown transition-opacity duration-300 shadow-2xl ${!isOpen ? 'h-0 opacity-0' : 'opacity-100'
           }`}
       >
         <RenderLoadableJupiter {...props} />

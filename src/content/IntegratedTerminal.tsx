@@ -1,7 +1,7 @@
 import { Wallet } from '@solana/wallet-adapter-react';
 import React, { useEffect, useState } from 'react';
-import { DEFAULT_EXPLORER, FormProps } from 'src/types';
-import { useDebouncedEffect } from 'src/misc/utils';
+import { DEFAULT_EXPLORER, FormProps } from '../types';
+import { useDebouncedEffect } from '../misc/utils';
 
 const IntegratedTerminal = (props: {
   rpcUrl: string;

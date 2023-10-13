@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
-import { useAppContext } from 'src/contexts/AppContext';
+import { useAppContext } from '../contexts/AppContext';
 
 import JupiterLogo from '../icons/JupiterLogo';
-import { WalletButton } from './WalletComponents';
-import RefreshSVG from 'src/icons/RefreshSVG';
+import RefreshSVG from '../icons/RefreshSVG';
 
 const Header: React.FC<{ setIsWalletModalOpen(toggle: boolean): void }> = ({ setIsWalletModalOpen }) => {
   const { form, refresh } = useAppContext();
@@ -29,7 +28,7 @@ const Header: React.FC<{ setIsWalletModalOpen(toggle: boolean): void }> = ({ set
             <RefreshSVG />
           </button>
 
-          <WalletButton setIsWalletModalOpen={setIsWalletModalOpen} />
+          {/* <WalletButton setIsWalletModalOpen={setIsWalletModalOpen} /> */}
         </div>
       </div>
     </div>

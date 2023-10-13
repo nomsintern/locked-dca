@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
-import { useScreenState } from 'src/contexts/ScreenProvider';
-import { LOCKING_PLAN, useAppContext } from 'src/contexts/AppContext';
-import LeftArrowIcon from 'src/icons/LeftArrowIcon';
+import { useScreenState } from '../../contexts/ScreenProvider';
+import { LOCKING_PLAN, useAppContext } from '../../contexts/AppContext';
+import LeftArrowIcon from '../../icons/LeftArrowIcon';
 import JupButton from '../JupButton';
-import SexyChameleonText from '../SexyChameleonText/SexyChameleonText';
 import classNames from 'classnames';
 
 const ConfirmationScreen = () => {
@@ -40,7 +39,7 @@ const ConfirmationScreen = () => {
 
       <div
         className={classNames(
-          'mt-4 space-y-2 border border-white/5 rounded-xl p-3 text-white flex flex-col items-center text-sm',
+          'mt-4 space-y-2 border border-bonk-light-border rounded-xl p-3 text-white flex flex-col items-center text-sm',
         )}
       >
         <span className='font-semibold'>Plan: {plan?.name}</span>
@@ -49,8 +48,8 @@ const ConfirmationScreen = () => {
         <span className='text-white/50'>{`${form.fromValue} ${fromTokenInfo?.symbol}`}</span>
       </div>
 
-      <JupButton size="lg" className="w-full mt-4 disabled:opacity-50" type="button" onClick={onSubmit}>
-        <SexyChameleonText>Confirm</SexyChameleonText>
+      <JupButton size="lg" className="w-full mt-4 disabled:opacity-50" bgClass='bg-bonk-primary-orange' type="button" onClick={onSubmit}>
+        <span>Confirm</span>
       </JupButton>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import InfoIconSVG from 'src/icons/InfoIconSVG';
+import InfoIconSVG from '../icons/InfoIconSVG';
 
 const InformationMessage: React.FC<{ message: ReactNode; iconSize?: number; className?: string }> = ({
   message,

@@ -3,9 +3,9 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { vs2015 } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import classNames from 'classnames';
 
-import { FormProps, IInit } from 'src/types';
-import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
-import { jsonToBase64 } from 'src/misc/utils';
+import { FormProps, IInit } from '../../types';
+import { IFormConfigurator, INITIAL_FORM_CONFIG } from '../../constants';
+import { jsonToBase64 } from '../../misc/utils';
 
 function addInlinesToCode(code: string, insertLines: string) {
   let lines = code.split('\n');
@@ -32,10 +32,10 @@ const { wallet } = useWallet();
   })();
   
   // Filter out the key that's not default
-  const filteredFormProps = Object.keys(formConfigurator.formProps).reduce<Partial<FormProps>>((acc, key) => {
+  const filteredFormProps = Object.keys(formConfigurator.formProps).reduce<Partial<FormProps>>((acc: any, key) => {
     const itemKey = key as keyof FormProps;
     if (formConfigurator.formProps[itemKey] !== INITIAL_FORM_CONFIG.formProps[itemKey]) {
-      acc[itemKey] = formConfigurator.formProps[itemKey] as any;
+      acc[itemKey] = formConfigurator.formProps[itemKey] as unknown as any;
     }
     return acc;
   }, {})

@@ -1,11 +1,11 @@
 import { Program } from '@coral-xyz/anchor';
 import { DCA, DCA_PROGRAM_ID_BY_CLUSTER } from '@jup-ag/dca-sdk';
-import { web3 } from '@project-serum/anchor';
-import { NATIVE_MINT, getAssociatedTokenAddressSync, createSyncNativeInstruction } from '@solana/spl-token';
+import { web3 } from '@coral-xyz/anchor';
 import { ComputeBudgetProgram, Connection, PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js';
 import BN from 'bn.js';
 import { deriveEscrow, getOrCreateATAInstruction } from './helpers';
 import { DcaIntegration } from './idl';
+import { getAssociatedTokenAddressSync, NATIVE_MINT, createSyncNativeInstruction } from '@solana/spl-token';
 
 export async function setupDCA({
   program,

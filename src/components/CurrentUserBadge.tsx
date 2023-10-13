@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import { WRAPPED_SOL_MINT } from 'src/constants';
-import { useAccounts } from 'src/contexts/accounts';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
+import { WRAPPED_SOL_MINT } from '../constants';
+import { useAccounts } from '../contexts/accounts';
+import { useWalletPassThrough } from '../contexts/WalletPassthroughProvider';
 
 import { shortenAddress } from '../misc/utils';
 

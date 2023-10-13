@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useRef, useState } from 'react';
-import { useScreenState } from 'src/contexts/ScreenProvider';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
-import { useOutsideClick } from 'src/misc/utils';
+import { useScreenState } from '../../contexts/ScreenProvider';
+import { useWalletPassThrough } from '../../contexts/WalletPassthroughProvider';
+import { useOutsideClick } from '../../misc/utils';
 import { CurrentUserBadge } from '../CurrentUserBadge';
 
 import { WalletModalButton } from './components/WalletModalButton';

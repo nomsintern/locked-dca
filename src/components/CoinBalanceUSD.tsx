@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { TokenInfo } from '@solana/spl-token-registry';
 import Decimal from 'decimal.js';
-import { useUSDValueProvider } from 'src/contexts/USDValueProvider';
-import { formatNumber, hasNumericValue } from 'src/misc/utils';
+import { useUSDValueProvider } from '../contexts/USDValueProvider';
+import { formatNumber, hasNumericValue } from '../misc/utils';
 
 const CoinBalanceUSD = ({ tokenInfo, amount }: { tokenInfo: TokenInfo; amount?: string }) => {
   const { tokenPriceMap } = useUSDValueProvider();
