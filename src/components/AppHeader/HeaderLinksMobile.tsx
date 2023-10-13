@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
-import DiscordIcon from 'src/icons/DiscordIcon';
-import RepoLogo from 'src/icons/RepoLogo';
-import SwapIcon from 'src/icons/SwapIcon';
+import DiscordIcon from '../../icons/DiscordIcon';
+import RepoLogo from '../../icons/RepoLogo';
+import SwapIcon from '../../icons/SwapIcon';
 
 const HeaderLink: React.FC<{
   external?: boolean;

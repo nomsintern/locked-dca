@@ -5,20 +5,17 @@ import { DefaultSeo } from 'next-seo';
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 
-import AppHeader from 'src/components/AppHeader/AppHeader';
-import Footer from 'src/components/Footer/Footer';
+import AppHeader from '../components/AppHeader/AppHeader';
+import Footer from '../components/Footer/Footer';
 
-import { IInit } from 'src/types';
-import { IFormConfigurator, INITIAL_FORM_CONFIG, JUPITER_DEFAULT_RPC } from 'src/constants';
+import { IInit } from '../types';
+import { IFormConfigurator, INITIAL_FORM_CONFIG, JUPITER_DEFAULT_RPC } from '../constants';
 import { Wallet } from '@solana/wallet-adapter-react';
 
 import { WalletReadyState } from '@solana/wallet-adapter-base';
 import { useForm } from 'react-hook-form';
-import { WalletButton } from 'src/components/WalletComponents';
-import Header from 'src/components/Header';
-import JupiterApp from 'src/components/Jupiter';
-import { RenderJupiter } from '../index';
-import IntegratedTerminal from 'src/content/IntegratedTerminal';
+
+import IntegratedTerminal from '../content/IntegratedTerminal';
 
 const isDeveloping = process.env.NODE_ENV === 'development' && typeof window !== 'undefined';
 // In NextJS preview env settings

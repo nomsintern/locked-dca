@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent, useCallback } from 'react';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
+import { useWalletPassThrough } from '../../../contexts/WalletPassthroughProvider';
 
 export const WalletModalButton: FC<{ setIsWalletModalOpen(toggle: boolean): void }> = ({ setIsWalletModalOpen }) => {
   const { connecting } = useWalletPassThrough();

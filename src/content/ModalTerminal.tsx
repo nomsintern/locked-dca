@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Wallet } from '@solana/wallet-adapter-react';
 
-import { DEFAULT_EXPLORER, FormProps } from 'src/types';
+import { DEFAULT_EXPLORER, FormProps } from '../types';
 
-import WalletDisconnectedGraphic from 'src/icons/WalletDisconnectedGraphic';
+import WalletDisconnectedGraphic from '../icons/WalletDisconnectedGraphic';
 
 const ModalTerminal = (props: {
   rpcUrl: string;

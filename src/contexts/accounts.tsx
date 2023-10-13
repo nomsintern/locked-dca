@@ -4,8 +4,8 @@ import { useConnection } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import React, { PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { useWalletPassThrough } from './WalletPassthroughProvider';
-import { WRAPPED_SOL_MINT } from 'src/constants';
-import { fromLamports } from 'src/misc/utils';
+import { WRAPPED_SOL_MINT } from '../constants';
+import { fromLamports } from '../misc/utils';
 
 export interface IAccountsBalance {
   balance: number;

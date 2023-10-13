@@ -1,10 +1,10 @@
 import { Wallet } from '@solana/wallet-adapter-react';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import JupButton from 'src/components/JupButton';
-import LeftArrowIcon from 'src/icons/LeftArrowIcon';
-import { useDebouncedEffect } from 'src/misc/utils';
-import { DEFAULT_EXPLORER, FormProps, WidgetPosition, WidgetSize } from 'src/types';
+import JupButton from '../components/JupButton';
+import LeftArrowIcon from '../icons/LeftArrowIcon';
+import { useDebouncedEffect } from '../misc/utils';
+import { DEFAULT_EXPLORER, FormProps, WidgetPosition, WidgetSize } from '../types';
 
 const WidgetTerminal = (props: { rpcUrl: string, formProps: FormProps, fakeWallet: Wallet | null, strictTokenList: boolean, defaultExplorer: DEFAULT_EXPLORER }) => {
   const { rpcUrl, fakeWallet, formProps, strictTokenList, defaultExplorer } = props;

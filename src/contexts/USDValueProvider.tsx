@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { createContext, FC, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useDebounce, useLocalStorage } from 'react-use';
-import { splitIntoChunks } from 'src/misc/utils';
+import { splitIntoChunks } from '../misc/utils';
 import { useAccounts } from './accounts';
 import { useTokenContext } from './TokenContextProvider';
 import { useAppContext } from './AppContext';

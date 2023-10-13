@@ -2,14 +2,14 @@ import { SwapMode } from '@jup-ag/react-hook';
 import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import { FormState, UseFormReset, UseFormSetValue } from 'react-hook-form';
-import ChevronDownIcon from 'src/icons/ChevronDownIcon';
-import InfoIconSVG from 'src/icons/InfoIconSVG';
+import ChevronDownIcon from '../icons/ChevronDownIcon';
+import InfoIconSVG from '../icons/InfoIconSVG';
 import Toggle from './Toggle';
 import Tooltip from './Tooltip';
 import { AVAILABLE_EXPLORER } from '../contexts/preferredExplorer/index';
-import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
+import { IFormConfigurator, INITIAL_FORM_CONFIG } from '../constants';
 import { useRouter } from 'next/router';
-import { base64ToJson } from 'src/misc/utils';
+import { base64ToJson } from '../misc/utils';
 
 const templateOptions: { name: string; description: string; values: IFormConfigurator }[] = [
   {

@@ -3,7 +3,7 @@ import React, { ReactNode, useContext, useEffect, useMemo, useState } from 'reac
 import { ENV as ChainID, TokenInfo, TokenListContainer } from '@solana/spl-token-registry';
 import { TOKEN_LIST_URL } from '@jup-ag/react-hook';
 import { useConnection } from '@solana/wallet-adapter-react';
-import { IInit } from 'src/types';
+import { IInit } from '../types';
 
 export type ENV = 'mainnet-beta' | 'testnet' | 'devnet' | 'localnet';
 export const CLUSTER_TO_CHAIN_ID: Record<ENV, ChainID> = {

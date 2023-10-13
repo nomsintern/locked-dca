@@ -1,7 +1,7 @@
 import { TokenInfo } from '@solana/spl-token-registry';
-import { usePreferredExplorer } from 'src/contexts/preferredExplorer';
-import ExternalIcon from 'src/icons/ExternalIcon';
-import { shortenAddress } from 'src/misc/utils';
+import { usePreferredExplorer } from '../contexts/preferredExplorer';
+import ExternalIcon from '../icons/ExternalIcon';
+import { shortenAddress } from '../misc/utils';
 
 const TokenLink: React.FC<{ tokenInfo: TokenInfo }> = (({ tokenInfo }) => {
   const { getTokenExplorer } = usePreferredExplorer();

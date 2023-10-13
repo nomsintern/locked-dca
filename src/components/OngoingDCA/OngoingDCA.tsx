@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import React, { useMemo, useState } from 'react';
-import { ParsedEscrow, useAppContext } from 'src/contexts/AppContext';
-import { useTokenContext } from 'src/contexts/TokenContextProvider';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
-import ChevronLeftIcon from 'src/icons/ChevronLeftIcon';
-import CloseIcon from 'src/icons/CloseIcon';
+import { ParsedEscrow, useAppContext } from '../../contexts/AppContext';
+import { useTokenContext } from '../../contexts/TokenContextProvider';
+import { useWalletPassThrough } from '../../contexts/WalletPassthroughProvider';
+import ChevronLeftIcon from '../../icons/ChevronLeftIcon';
+import CloseIcon from '../../icons/CloseIcon';
 import TokenIcon from '../TokenIcon';
 import Decimal from 'decimal.js';
 import Spinner from '../Spinner';
@@ -100,7 +100,7 @@ const DCAList: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const { active, finished, closed } = escrows;
 
   return (
-    <div className={classNames('w-full rounded-xl flex flex-col bg-jupiter-bg text-white shadow-xl max-h-[90%]')}>
+    <div className={classNames('w-full rounded-xl flex flex-col bg-bonk-dark-brown text-white shadow-xl max-h-[90%]')}>
       <div className="flex justify-between items-center p-4 border-b border-white/10">
         <div className="text-sm font-semibold">
           <span>All orders</span>

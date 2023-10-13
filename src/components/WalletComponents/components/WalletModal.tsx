@@ -3,7 +3,7 @@ import { WalletListItem } from './WalletListItem';
 import { Adapter, WalletReadyState } from '@solana/wallet-adapter-base';
 
 import { useWallet, WalletContextState } from '@solana/wallet-adapter-react';
-import LeftArrowIcon from 'src/icons/LeftArrowIcon';
+import LeftArrowIcon from '../../../icons/LeftArrowIcon';
 
 const PRIORITISE: {
   [value in WalletReadyState]: number;

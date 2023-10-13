@@ -15,14 +15,14 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { BONK_MINT } from 'src/constants';
-import { DcaIntegration, IDL } from 'src/dca/idl';
-import { FormProps, IInit } from 'src/types';
+import { BONK_MINT } from '../constants';
+import { DcaIntegration, IDL } from '../dca/idl';
+import { FormProps, IInit } from '../types';
 import { useTokenContext } from './TokenContextProvider';
 import { useWalletPassThrough } from './WalletPassthroughProvider';
 import { useAccounts } from './accounts';
 import Decimal from 'decimal.js';
-import { findByUser, setupDCA } from 'src/dca';
+import { findByUser, setupDCA } from '../dca';
 import { BN } from 'bn.js';
 import { getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { useQuery } from '@tanstack/react-query';

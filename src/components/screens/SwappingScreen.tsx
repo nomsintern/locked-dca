@@ -1,13 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Rive, { Alignment, Fit, Layout } from '@rive-app/react-canvas';
 
-import { useScreenState } from 'src/contexts/ScreenProvider';
-import { useAppContext } from 'src/contexts/AppContext';
+import { useScreenState } from '../../contexts/ScreenProvider';
+import { useAppContext } from '../../contexts/AppContext';
 import JupButton from '../JupButton';
-import SexyChameleonText from '../SexyChameleonText/SexyChameleonText';
 import Spinner from '../Spinner';
-import SuccessIcon from 'src/icons/SuccessIcon';
-import { usePreferredExplorer } from 'src/contexts/preferredExplorer';
+import SuccessIcon from '../../icons/SuccessIcon';
+import { usePreferredExplorer } from '../../contexts/preferredExplorer';
 import TokenIcon from '../TokenIcon';
 
 const ErrorIcon = () => {
@@ -188,14 +187,12 @@ const SwappingScreen = () => {
         ) : null}
 
         <div className="mt-auto px-5 pb-4 flex space-x-2">
-          <JupButton size="lg" className="w-full mt-4" type="button" onClick={onSwapMore}>
-            <SexyChameleonText>
-              <span className="text-sm">Go Back</span>
-            </SexyChameleonText>
+          <JupButton size="lg" className="w-full mt-4" bgClass='bg-bonk-primary-orange' type="button" onClick={onSwapMore}>
+            <span>Go Back</span>
           </JupButton>
 
           {displayMode !== 'integrated' ? (
-            <JupButton size="lg" className="w-full mt-4" type="button" onClick={onClose}>
+            <JupButton size="lg" className="w-full mt-4"  bgClass='bg-bonk-primary-orange' type="button" onClick={onClose}>
               <span className="text-sm">Close</span>
             </JupButton>
           ) : null}
@@ -216,7 +213,7 @@ const SwappingScreen = () => {
             {errorMessage ? <p className="text-white/50 text-xs mt-2">{errorMessage}</p> : ''}
 
             <JupButton size="lg" className="w-full mt-6 disabled:opacity-50" type="button" onClick={onGoBack}>
-              <SexyChameleonText>Retry</SexyChameleonText>
+              <span>Retry</span>
             </JupButton>
           </div>
         </div>

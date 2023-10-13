@@ -1,16 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { TokenInfo } from '@solana/spl-token-registry';
-
 import Form from '../../components/Form';
 import FormPairSelector from '../../components/FormPairSelector';
 import { useAccounts } from '../../contexts/accounts';
 import { useTokenContext } from '../../contexts/TokenContextProvider';
-import { WalletModal } from 'src/components/WalletComponents/components/WalletModal';
-import { useAppContext } from 'src/contexts/AppContext';
-import { useScreenState } from 'src/contexts/ScreenProvider';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
+import { WalletModal } from '../../components/WalletComponents/components/WalletModal';
+import { useScreenState } from '../../contexts/ScreenProvider';
+import { useWalletPassThrough } from '../../contexts/WalletPassthroughProvider';
 import OngoingDCA from '../OngoingDCA/OngoingDCA';
-
+import { useAppContext } from '../../contexts/AppContext';
 interface Props {
   isWalletModalOpen: boolean;
   setIsWalletModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -113,7 +111,7 @@ const InitialScreen = ({ setIsWalletModalOpen, isWalletModalOpen }: Props) => {
       </form>
 
       {selectPairSelector !== null ? (
-        <div className="absolute top-0 left-0 h-full w-full bg-jupiter-bg rounded-lg overflow-hidden">
+        <div className="absolute top-0 left-0 h-full w-full bg-bonk-dark-brown rounded-lg overflow-hidden">
           <FormPairSelector
             onSubmit={onSelectMint}
             tokenInfos={availableMints}

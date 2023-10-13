@@ -1,29 +1,21 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';
-
 import { useAccounts } from '../contexts/accounts';
-
 import { MAX_INPUT_LIMIT, MINIMUM_SOL_BALANCE } from '../misc/constants';
-
 import CoinBalance from './Coinbalance';
 import FormError from './FormError';
-
 import TokenIcon from './TokenIcon';
-
-import { WRAPPED_SOL_MINT } from '../constants';
-import { useWalletPassThrough } from 'src/contexts/WalletPassthroughProvider';
-import WalletIcon from 'src/icons/WalletIcon';
 import classNames from 'classnames';
-import { detectedSeparator, formatNumber } from 'src/misc/utils';
-import CoinBalanceUSD from './CoinBalanceUSD';
-import ChevronDownIcon from 'src/icons/ChevronDownIcon';
-import JupButton from './JupButton';
-import SexyChameleonText from './SexyChameleonText/SexyChameleonText';
-import useJupiterSwapPriceFetcher from 'src/hooks/useJupiterSwapPriceFetcher';
 import Decimal from 'decimal.js';
-import { ILockingPlan, LOCKING_PLAN, useAppContext } from 'src/contexts/AppContext';
-
-
+import { WRAPPED_SOL_MINT } from '../constants';
+import { LOCKING_PLAN, useAppContext } from '../contexts/AppContext';
+import { useWalletPassThrough } from '../contexts/WalletPassthroughProvider';
+import useJupiterSwapPriceFetcher from '../hooks/useJupiterSwapPriceFetcher';
+import ChevronDownIcon from '../icons/ChevronDownIcon';
+import WalletIcon from '../icons/WalletIcon';
+import { detectedSeparator, formatNumber } from '../misc/utils';
+import CoinBalanceUSD from './CoinBalanceUSD';
+import JupButton from './JupButton';
 
 const Form: React.FC<{
   onSubmit: () => void;
@@ -135,14 +127,14 @@ const Form: React.FC<{
     <div className="h-full flex flex-col items-center pb-4">
       <div className="w-full mt-2 rounded-xl flex flex-col px-2">
         <div className="flex-col">
-          <div className={classNames('border-b border-transparent bg-[#212128] rounded-xl transition-all')}>
+          <div className={classNames('border-b border-transparent bg-bonk-dark-brown rounded-xl transition-all')}>
             <div className={classNames('px-x border-transparent rounded-xl ')}>
               <div>
                 <div className={classNames('py-5 px-4 flex flex-col dark:text-white')}>
                   <div className="flex justify-between items-center">
                     <button
                       type="button"
-                      className="py-2 px-3 rounded-2xl flex items-center bg-[#36373E] hover:bg-white/20 text-white"
+                      className="py-2 px-3 rounded-2xl flex items-center bg-bonk-primary-orange hover:bg-bonk-primary-hover text-white"
                       onClick={onClickSelectFromMint}
                     >
                       <div className="h-5 w-5">
@@ -208,8 +200,8 @@ const Form: React.FC<{
                   key={item.name}
                   onClick={() => setForm(prev => ({ ...prev, selectedPlan: item.name }))}
                   className={classNames(
-                    'w-full p-3 flex flex-col items-center justify-center space-y-2 bg-[#212128] rounded-xl cursor-pointer',
-                    selectedPlan === item.name ? 'border border-jupiter-jungle-green' : 'border border-transparent',
+                    'w-full p-3 flex flex-col items-center justify-center space-y-2 bg-bonk-dark-brown rounded-xl cursor-pointer',
+                    selectedPlan === item.name ? 'border border-bonk-light-border' : 'border border-transparent',
                   )}
                 >
                   <span className="text-white font-semibold">{item.name}</span>
@@ -234,23 +226,25 @@ const Form: React.FC<{
             )}
           </div>
 
-          <div className="w-full px-2">
+          {/* <div className="w-full px-2">
             {!walletPublicKey ? (
               <JupButton size="lg" className="w-full mt-4" type="button" onClick={onConnectWallet}>
                 Connect Wallet
               </JupButton>
             ) : (
+            )}
+          </div> */}
+
               <JupButton
                 size="lg"
+                bgClass='bg-bonk-primary-orange'
                 className="w-full mt-4 disabled:opacity-50"
                 type="button"
                 onClick={onSubmit}
                 disabled={isDisabled || loading}
               >
-                {loading ? <span className="text-sm">Loading...</span> : <SexyChameleonText>Lock</SexyChameleonText>}
+                {loading ? <span className="text-sm">Loading...</span> : <span className="text-sm bg-bonk-primary-orange hover:bg-bonk-primary-hover">Lock</span>}
               </JupButton>
-            )}
-          </div>
         </div>
 
         {walletPublicKey ? <FormError errors={errors} /> : null}
