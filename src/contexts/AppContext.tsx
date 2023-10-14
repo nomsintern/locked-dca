@@ -26,6 +26,7 @@ import { findByUser, setupDCA } from '../dca';
 import { BN } from 'bn.js';
 import { getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { useQuery } from '@tanstack/react-query';
+import { SignerWalletAdapter } from '@solana/wallet-adapter-base';
 
 export interface IForm {
   fromMint: string;
@@ -321,12 +322,15 @@ export const AppContext: FC<{
 
   const onSubmit = useCallback(async () => {
     const plan = LOCKING_PLAN.find((plan) => plan.name === form.selectedPlan);
-    if (!program || !dcaClient || !plan || !fromTokenInfo || !walletPublicKey || !signTransaction) return;
+
+    if (!program || !dcaClient || !plan || !fromTokenInfo || !walletPublicKey) {
+      throw new Error(`could not send transaction`)
+    };
 
     try {
       const frequency = plan.numberOfTrade;
       const inAmount = new Decimal(form.fromValue).mul(10 ** fromTokenInfo.decimals);
-      const userInTokenAccount = await getAssociatedTokenAddressSync(
+      const userInTokenAccount = getAssociatedTokenAddressSync(
         new PublicKey(form.fromMint),
         walletPublicKey,
       );
@@ -346,7 +350,8 @@ export const AppContext: FC<{
 
       tx.recentBlockhash = (await connection.getLatestBlockhash('confirmed')).blockhash;
       tx.feePayer = walletPublicKey;
-      tx = await signTransaction(tx);
+
+      tx = await (wallet?.adapter as SignerWalletAdapter).signTransaction(tx);
       const rawTransaction = tx.serialize();
       const txid = await connection.sendRawTransaction(rawTransaction, {
         skipPreflight: true,

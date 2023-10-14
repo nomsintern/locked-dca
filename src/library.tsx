@@ -6,6 +6,7 @@ import { CSSProperties, useEffect, useMemo, useState } from 'react';
 import JupiterLogo from './icons/JupiterLogo';
 import ChevronDownIcon from './icons/ChevronDownIcon';
 import classNames from 'classnames';
+import { useTheme } from 'next-themes';
 
 const containerId = 'jupiter-terminal';
 const packageJson = require('../package.json');
@@ -109,12 +110,15 @@ const RenderShell = (props: IInit) => {
   const containerStyles = props.containerStyles;
   const containerClassName = props.containerClassName;
 
+  // TODO ThemeProvider not propagating down here either
+  const { theme: themeName } = useTheme();
+
   const displayClassName = useMemo(() => {
     // Default Modal
     if (!displayMode || displayMode === 'modal') {
       return 'fixed top-0 w-screen h-screen flex items-center justify-center bg-black/50';
     } else if (displayMode === 'integrated' || displayMode === 'widget') {
-      return `flex items-center justify-center w-full h-full rounded-xl p-1 bg-bonk-dark-base`;
+      return `flex items-center justify-center w-full h-full rounded-xl p-1 ${themeName === 'light'? 'bg-bonk-light-base' : 'bg-bonk-dark-base'} `;
     }
   }, [displayMode]);
 

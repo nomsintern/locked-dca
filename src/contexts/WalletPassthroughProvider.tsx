@@ -37,7 +37,7 @@ const WalletPassthroughProvider: FC<{ children: ReactNode }> = ({ children }) =>
 
   const value = (() => {
     // Pass through wallet adapter
-    const passThroughWallet = window.Jupiter.passThroughWallet;
+    const passThroughWallet = window.Jupiter?.passThroughWallet;
 
     if (Boolean(passThroughWallet) && passThroughWallet?.adapter.publicKey) {
       return {

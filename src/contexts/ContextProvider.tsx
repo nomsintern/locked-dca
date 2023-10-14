@@ -9,7 +9,7 @@ import { NetworkConfigurationProvider, useNetworkConfiguration } from './Network
 
 // Built in wallets
 // import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
-// import { SolflareWalletAdapter } from '@solana/wallet-adapter-solflare';
+import { SolflareWalletAdapter } from '@solana/wallet-adapter-solflare';
 // import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack';
 // import { GlowWalletAdapter } from '@solana/wallet-adapter-glow';
 import { PreferredExplorerProvider } from './preferredExplorer';
@@ -19,11 +19,15 @@ const WalletContextProvider: FC<{ endpoint?: string; children: ReactNode }> = ({
   const { autoConnect } = useAutoConnect();
   const { networkConfiguration } = useNetworkConfiguration();
   const network = networkConfiguration as WalletAdapterNetwork;
-  const selectedEndpoint: string = useMemo(() => endpoint ?? clusterApiUrl(network), [network]);
+
+  //////////////////////////////////////////////////////////////////////////////////////
+  // TODO remove this hardcoding, but I think the process.env isn't propagating 
+  //////////////////////////////////////////////////////////////////////////////////////
+  const selectedEndpoint: string = useMemo(() => 'https://mainnet.helius-rpc.com/?api-key=d406f84c-50a0-4a68-afac-dc094226e921', [network]);
 
   const passThroughWallet = (() => {
     if (typeof window === 'undefined') return undefined;
-    return window.Jupiter.passThroughWallet;
+    return window.Jupiter?.passThroughWallet;
   })();
 
   const wallets = useMemo(() => {
@@ -33,7 +37,7 @@ const WalletContextProvider: FC<{ endpoint?: string; children: ReactNode }> = ({
 
     return [
       // new PhantomWalletAdapter(),
-      // new SolflareWalletAdapter(),
+      new SolflareWalletAdapter(),
       // new BackpackWalletAdapter(),
       // new GlowWalletAdapter(),
     ];

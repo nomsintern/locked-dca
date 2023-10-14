@@ -134,7 +134,7 @@ const Form: React.FC<{
                   <div className="flex justify-between items-center">
                     <button
                       type="button"
-                      className="py-2 px-3 rounded-2xl flex items-center bg-bonk-primary-orange hover:bg-bonk-primary-hover text-white"
+                      className="py-2 px-3 rounded-2xl flex items-center bg-bonk-primary-orange hover:brightness-110 text-white"
                       onClick={onClickSelectFromMint}
                     >
                       <div className="h-5 w-5">
@@ -237,13 +237,13 @@ const Form: React.FC<{
 
               <JupButton
                 size="lg"
-                bgClass='bg-bonk-primary-orange'
+                bgClass='bg-bonk-primary-orange hover:brightness-110'
                 className="w-full mt-4 disabled:opacity-50"
                 type="button"
                 onClick={onSubmit}
                 disabled={isDisabled || loading}
               >
-                {loading ? <span className="text-sm">Loading...</span> : <span className="text-sm bg-bonk-primary-orange hover:bg-bonk-primary-hover">Lock</span>}
+                {loading ? <span className="text-sm">Loading...</span> : <span className="text-bonk-white font-bold text-lg">Lock</span>}
               </JupButton>
         </div>
 
