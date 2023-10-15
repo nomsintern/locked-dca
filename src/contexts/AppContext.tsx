@@ -27,6 +27,7 @@ import { BN } from 'bn.js';
 import { getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { useQuery } from '@tanstack/react-query';
 import { SignerWalletAdapter } from '@solana/wallet-adapter-base';
+import { publicKey } from '@solana/buffer-layout-utils';
 
 export interface IForm {
   fromMint: string;
@@ -327,6 +328,8 @@ export const AppContext: FC<{
       throw new Error(`could not send transaction`)
     };
 
+    let rawTransaction: Buffer
+
     try {
       const frequency = plan.numberOfTrade;
       const inAmount = new Decimal(form.fromValue).mul(10 ** fromTokenInfo.decimals);
@@ -352,7 +355,7 @@ export const AppContext: FC<{
       tx.feePayer = walletPublicKey;
 
       tx = await (wallet?.adapter as SignerWalletAdapter).signTransaction(tx);
-      const rawTransaction = tx.serialize();
+      rawTransaction = tx.serialize();
       const txid = await connection.sendRawTransaction(rawTransaction, {
         skipPreflight: true,
       });
@@ -366,11 +369,12 @@ export const AppContext: FC<{
       setTxStatus({ txid, txDescription: 'Locking your tokens...', status: 'success' });
     } catch (error) {
       console.error(error);
+      console.log({rawTransaction: rawTransaction?.toString('base64')})
       setTxStatus({ txid: '', txDescription: (error as any)?.message, status: 'fail' });
     } finally {
       refreshAll();
     }
-  }, [form, walletPublicKey]);
+  }, [form, walletPublicKey, wallet]);
 
   const onClose = useCallback(
     async (dca: PublicKey, escrow: PublicKey, inputMint: PublicKey, outputMint: PublicKey) => {

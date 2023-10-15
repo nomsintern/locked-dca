@@ -187,12 +187,12 @@ const SwappingScreen = () => {
         ) : null}
 
         <div className="mt-auto px-5 pb-4 flex space-x-2">
-          <JupButton size="lg" className="w-full mt-4" bgClass='bg-bonk-primary-orange' type="button" onClick={onSwapMore}>
+          <JupButton size="lg" className="w-full mt-4 text-bonk-white" bgClass='bg-bonk-primary-orange' type="button" onClick={onSwapMore}>
             <span>Go Back</span>
           </JupButton>
 
           {displayMode !== 'integrated' ? (
-            <JupButton size="lg" className="w-full mt-4"  bgClass='bg-bonk-primary-orange' type="button" onClick={onClose}>
+            <JupButton size="lg" className="w-full mt-4 text-bonk-white"  bgClass='bg-bonk-primary-orange' type="button" onClick={onClose}>
               <span className="text-sm">Close</span>
             </JupButton>
           ) : null}

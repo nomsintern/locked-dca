@@ -48,7 +48,7 @@ const ConfirmationScreen = () => {
         <span className='text-white/50'>{`${form.fromValue} ${fromTokenInfo?.symbol}`}</span>
       </div>
 
-      <JupButton size="lg" className="w-full mt-4 disabled:opacity-50" bgClass='bg-bonk-primary-orange hover:brightness-110' type="button" onClick={onSubmit}>
+      <JupButton size="lg" className="w-full mt-4 disabled:opacity-50" bgClass='text-sm text-bonk-white bg-bonk-primary-orange hover:brightness-110' type="button" onClick={onSubmit}>
         <span className="text-bonk-white font-bold text-lg">Confirm</span>
       </JupButton>
     </div>
