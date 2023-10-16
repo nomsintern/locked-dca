@@ -18,6 +18,7 @@ export async function setupDCA({
   inAmount,
   inAmountPerCycle,
   cycleSecondsApart,
+  planDurationSeconds,
 }: {
   program: Program<DcaIntegration>;
   dcaClient: DCA;
@@ -29,6 +30,7 @@ export async function setupDCA({
   inAmount: BN;
   inAmountPerCycle: BN;
   cycleSecondsApart: BN;
+  planDurationSeconds: number;
 }): Promise<Transaction> {
   const uid = new BN(parseInt((Date.now() / 1000).toString()));
   const escrow = deriveEscrow(program.programId, userPublicKey, inputMint, outputMint, uid);
@@ -62,24 +64,24 @@ export async function setupDCA({
     userTokenAccount: userInTokenAccount,
     jupDcaProgram: DCA_PROGRAM_ID_BY_CLUSTER['mainnet-beta'],
     jupDca: dcaPubKey,
-    jupDcaInAta: await getAssociatedTokenAddressSync(
+    jupDcaInAta: getAssociatedTokenAddressSync(
       inputMint,
       dcaPubKey,
       true,
     ),
-    jupDcaOutAta: await getAssociatedTokenAddressSync(
+    jupDcaOutAta: getAssociatedTokenAddressSync(
       outputMint,
       dcaPubKey,
       true,
     ),
     jupDcaEventAuthority: new PublicKey('Cspp27eGUDMXxPEdhmEXFVRn6Lt1L7xJyALF3nmnWoBj'),
     escrow,
-    escrowInAta: await getAssociatedTokenAddressSync(
+    escrowInAta: getAssociatedTokenAddressSync(
       inputMint,
       escrow,
       true,
     ),
-    escrowOutAta: await getAssociatedTokenAddressSync(
+    escrowOutAta: getAssociatedTokenAddressSync(
       outputMint,
       escrow,
       true,
@@ -89,30 +91,30 @@ export async function setupDCA({
   });
 
   const tx = await program.methods
-    .setupDca(uid, inAmount, inAmountPerCycle, cycleSecondsApart, null, null, null)
+    .setupDca(uid, inAmount, inAmountPerCycle, cycleSecondsApart, planDurationSeconds)
     .accounts({
       user: userPublicKey,
       userTokenAccount: userInTokenAccount,
       jupDcaProgram: DCA_PROGRAM_ID_BY_CLUSTER['mainnet-beta'],
       jupDca: dcaPubKey,
-      jupDcaInAta: await getAssociatedTokenAddressSync(
+      jupDcaInAta: getAssociatedTokenAddressSync(
         inputMint,
         dcaPubKey,
         true,
       ),
-      jupDcaOutAta: await getAssociatedTokenAddressSync(
+      jupDcaOutAta: getAssociatedTokenAddressSync(
         outputMint,
         dcaPubKey,
         true,
       ),
       jupDcaEventAuthority: new PublicKey('Cspp27eGUDMXxPEdhmEXFVRn6Lt1L7xJyALF3nmnWoBj'),
       escrow,
-      escrowInAta: await getAssociatedTokenAddressSync(
+      escrowInAta: getAssociatedTokenAddressSync(
         inputMint,
         escrow,
         true,
       ),
-      escrowOutAta: await getAssociatedTokenAddressSync(
+      escrowOutAta: getAssociatedTokenAddressSync(
         outputMint,
         escrow,
         true,

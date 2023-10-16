@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useMemo, useState } from 'react';
-import { ParsedEscrow, useAppContext } from '../../contexts/AppContext';
+import { LOCKING_PLAN, ParsedEscrow, useAppContext } from '../../contexts/AppContext';
 import { useTokenContext } from '../../contexts/TokenContextProvider';
 import { useWalletPassThrough } from '../../contexts/WalletPassthroughProvider';
 import ChevronLeftIcon from '../../icons/ChevronLeftIcon';
@@ -8,6 +8,7 @@ import CloseIcon from '../../icons/CloseIcon';
 import TokenIcon from '../TokenIcon';
 import Decimal from 'decimal.js';
 import Spinner from '../Spinner';
+import { formatNumber } from '../../misc/utils';
 
 const DCAItem: React.FC<{ item: ParsedEscrow }> = ({ item }) => {
   const { tokenMap } = useTokenContext();
@@ -15,6 +16,8 @@ const DCAItem: React.FC<{ item: ParsedEscrow }> = ({ item }) => {
 
   const inputMint = useMemo(() => item.parsed?.account.inputMint, [item]);
   const outputMint = useMemo(() => item.parsed?.account.outputMint, [item]);
+  const planDurationSeconds = useMemo(() => item.account.planDurationSeconds, [item]);
+  const plan = useMemo(() => LOCKING_PLAN.find(p => p.planDurationSeconds === planDurationSeconds), [item]);
   const inputTokenInfo = useMemo(() => (inputMint ? tokenMap.get(inputMint.toString()) : null), [item]);
   const outputTokenInfo = useMemo(() => (outputMint ? tokenMap.get(outputMint.toString()) : null), [item]);
 
@@ -27,8 +30,10 @@ const DCAItem: React.FC<{ item: ParsedEscrow }> = ({ item }) => {
     [item],
   );
 
+  const bonus = useMemo(() => outputAmount.mul(new Decimal(plan.incetivesPct/100)) , [item, outputAmount, plan])
   const [isClosing, setIsClosing] = useState(false);
   const onCloseDCA = async () => {
+
     if (!inputMint || !outputMint) return;
 
     try {
@@ -60,10 +65,10 @@ const DCAItem: React.FC<{ item: ParsedEscrow }> = ({ item }) => {
         </div>
 
         <span>
-          Deposited: {initialDeposited.toString()} {inputTokenInfo?.symbol}
+          Deposited: {initialDeposited.toString()} {inputTokenInfo?.symbol} 
         </span>
         <span>
-          Bought: {outputAmount.toString()} {outputTokenInfo?.symbol}
+          Bought: {formatNumber.format(outputAmount.toNumber(), 2)} {outputTokenInfo?.symbol} <span className='rewards-highlight'> +{bonus.toFixed(0)} </span>
         </span>
       </div>
 
