@@ -101,7 +101,7 @@ export const initialSwapContext: ISwapContext = {
     toMint: BONK_MINT.toString(),
     fromValue: '',
     toValue: '',
-    selectedPlan: '5 minutes',
+    selectedPlan: '14 days',
   },
   setForm() {},
   errors: {},
@@ -140,12 +140,13 @@ export const initialSwapContext: ISwapContext = {
 };
 
 export type ILockingPlan = {
-  name: '5 minutes' | '60 days' | '90 days';
+  name: '5 minutes' | '14 days' | '30 days' | '90 days';
   // minAmountInUSD: number;
   // maxAmountInUSD: number;
   incetivesPct: number;
   cycleSecondsApart: number;
   numberOfTrade: number;
+  planDurationSeconds: number;
 };
 
 export const SECONDS_IN_MINUTE = 60; // 1 minute
@@ -153,21 +154,31 @@ export const SECONDS_IN_DAY = 86400; // 1 day
 export const LOCKING_PLAN: ILockingPlan[] = [
   {
     name: `5 minutes`,
-    incetivesPct: 0,
+    incetivesPct: 2,
     cycleSecondsApart: SECONDS_IN_MINUTE, // executed per minute
     numberOfTrade: 5,
+    planDurationSeconds: SECONDS_IN_MINUTE * 5,
   },
   {
-    name: `60 days`,
-    incetivesPct: 20,
+    name: `14 days`,
+    incetivesPct: 2,
     cycleSecondsApart: SECONDS_IN_DAY,
-    numberOfTrade: 60, // executed daily
+    numberOfTrade: 14,
+    planDurationSeconds: SECONDS_IN_DAY * 14,
+  },
+  {
+    name: `30 days`,
+    incetivesPct: 5,
+    cycleSecondsApart: SECONDS_IN_DAY,
+    numberOfTrade: 30,
+    planDurationSeconds: SECONDS_IN_DAY * 30,
   },
   {
     name: `90 days`,
-    incetivesPct: 30,
+    incetivesPct: 10,
     cycleSecondsApart: SECONDS_IN_DAY,
-    numberOfTrade: 90, // executed daily
+    numberOfTrade: 90,
+    planDurationSeconds: SECONDS_IN_DAY * 90,
   },
 ];
 
@@ -177,7 +188,7 @@ export function useAppContext(): ISwapContext {
   return useContext(SwapContext);
 }
 
-const LOCKED_DCA_PROGRAM_ID = new PublicKey('5mrhiqFFXyfJMzAJc5vsEQ4cABRhfsP7MgSVgGQjfcrR');
+const LOCKED_DCA_PROGRAM_ID = new PublicKey('BoDCAjKTzVkunw5xx5r3EPWqe3uyNABJJjSRCJNoRmZa');
 export const PRIORITY_NONE = 0; // No additional fee
 export const PRIORITY_HIGH = 0.000_005; // Additional fee of 1x base fee
 export const PRIORITY_TURBO = 0.000_5; // Additional fee of 100x base fee
@@ -208,7 +219,7 @@ export const AppContext: FC<{
     toMint: BONK_MINT.toString(),
     fromValue: '',
     toValue: '',
-    selectedPlan: '5 minutes',
+    selectedPlan: '14 days',
   });
   const [errors, setErrors] = useState<Record<string, { title: string; message: string }>>({});
 
@@ -349,6 +360,7 @@ export const AppContext: FC<{
         inAmount: new BN(inAmount.toString()),
         inAmountPerCycle: new BN(inAmount.div(new Decimal(frequency)).floor().toString()),
         cycleSecondsApart: new BN(plan.cycleSecondsApart),
+        planDurationSeconds: plan.planDurationSeconds,
       });
 
       tx.recentBlockhash = (await connection.getLatestBlockhash('confirmed')).blockhash;
@@ -378,28 +390,35 @@ export const AppContext: FC<{
 
   const onClose = useCallback(
     async (dca: PublicKey, escrow: PublicKey, inputMint: PublicKey, outputMint: PublicKey) => {
-      if (!walletPublicKey || !signTransaction) return;
+
+      if (!walletPublicKey) {
+        throw new Error(`could not sign close tx`)
+      };
+
+      const [vaultSigner] = PublicKey.findProgramAddressSync([Buffer.from('vault')], program.programId )
 
       try {
         let tx = await program.methods
           .close()
           .accounts({
+            vault: getAssociatedTokenAddressSync(BONK_MINT, vaultSigner, true),
+            vaultSigner,
             inputMint,
             outputMint,
             user: new PublicKey(walletPublicKey),
-            userTokenAccount: await getAssociatedTokenAddressSync(
+            userTokenAccount: getAssociatedTokenAddressSync(
               outputMint,
               new PublicKey(walletPublicKey),
               false,
             ),
             escrow,
             dca,
-            escrowInAta: await getAssociatedTokenAddressSync(
+            escrowInAta: getAssociatedTokenAddressSync(
               inputMint,
               escrow,
               true,
             ),
-            escrowOutAta: await getAssociatedTokenAddressSync(
+            escrowOutAta: getAssociatedTokenAddressSync(
               outputMint,
               escrow,
               true,
@@ -409,7 +428,8 @@ export const AppContext: FC<{
 
         tx.recentBlockhash = (await connection.getLatestBlockhash('confirmed')).blockhash;
         tx.feePayer = walletPublicKey;
-        tx = await signTransaction(tx);
+        //tx = await signTransaction(tx);
+        tx = await (wallet?.adapter as SignerWalletAdapter).signTransaction(tx);
         const rawTransaction = tx.serialize();
         const txid = await connection.sendRawTransaction(rawTransaction, {
           skipPreflight: true,

@@ -166,6 +166,11 @@
 	color: #fff;
 }
 
+
+.rewards-highlight {
+	@apply text-xxs text-center font-semibold p-1 ml-1 bg-bonk-primary-orange text-bonk-dark-brown rounded-xl
+}
+
 /*
   obsidian: "#333333", 
   ash: "#4D4D4D",-- dark
