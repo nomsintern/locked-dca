@@ -140,7 +140,8 @@ export const initialSwapContext: ISwapContext = {
 };
 
 export type ILockingPlan = {
-  name: '5 minutes' | '14 days' | '30 days' | '90 days';
+  //name: '5 minutes' | '14 days' | '30 days' | '90 days';
+  name: '14 days' | '30 days' | '90 days';
   // minAmountInUSD: number;
   // maxAmountInUSD: number;
   incetivesPct: number;
@@ -152,13 +153,13 @@ export type ILockingPlan = {
 export const SECONDS_IN_MINUTE = 60; // 1 minute
 export const SECONDS_IN_DAY = 86400; // 1 day
 export const LOCKING_PLAN: ILockingPlan[] = [
-  {
-    name: `5 minutes`,
-    incetivesPct: 2,
-    cycleSecondsApart: SECONDS_IN_MINUTE, // executed per minute
-    numberOfTrade: 5,
-    planDurationSeconds: SECONDS_IN_MINUTE * 5,
-  },
+  // {
+  //   name: `5 minutes`,
+  //   incetivesPct: 2,
+  //   cycleSecondsApart: SECONDS_IN_MINUTE, // executed per minute
+  //   numberOfTrade: 5,
+  //   planDurationSeconds: SECONDS_IN_MINUTE * 5,
+  // },
   {
     name: `14 days`,
     incetivesPct: 2,
