@@ -23,7 +23,7 @@ const WalletContextProvider: FC<{ endpoint?: string; children: ReactNode }> = ({
   //////////////////////////////////////////////////////////////////////////////////////
   // TODO remove this hardcoding, but I think the process.env isn't propagating 
   //////////////////////////////////////////////////////////////////////////////////////
-  const selectedEndpoint: string = useMemo(() => 'https://mainnet.helius-rpc.com/?api-key=d406f84c-50a0-4a68-afac-dc094226e921', [network]);
+  const selectedEndpoint: string = useMemo(() => process.env.NEXT_PUBLIC_SOLANA_CLUSTER_URL ?? 'https://api.mainnet-beta.solana.com', [network]);
 
   const passThroughWallet = (() => {
     if (typeof window === 'undefined') return undefined;
